@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Calculator, ChevronDown, DollarSign, ArrowRight } from 'lucide-react'
+import { Calculator, ChevronDown, DollarSign, ArrowRight, Search } from 'lucide-react'
 import Fuse from 'fuse.js'
 import { Model, Provider, formatPrice } from '@/lib/types'
-import { getProviderGradient } from '@/lib/gradients'
+import { getProviderColor } from '@/lib/gradients'
 
 interface PriceCalculatorProps {
   models: Model[]
@@ -78,77 +78,69 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Model Selector */}
-      <div className="p-6 rounded-2xl bg-bg-secondary border border-border-color">
-        <label className="text-sm text-text-muted mb-3 block">Select Model</label>
+      <div className="p-5 rounded-xl bg-bg-primary border border-border-primary">
+        <label className="label mb-3 block">Select Model</label>
         <div className="relative">
           <div
-            className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-border-color cursor-pointer hover:border-white/20 transition-colors"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg bg-bg-secondary border border-border-primary cursor-pointer hover:border-border-hover transition-colors"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             {selectedModel ? (
               <>
-                <div 
-                  className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0"
-                  style={{ background: `linear-gradient(135deg, ${getProviderGradient(selectedModel.provider).from}, ${getProviderGradient(selectedModel.provider).to})` }}
-                >
-                  {selectedModel.providerDisplayName.charAt(0)}
-                </div>
+                <span 
+                  className="w-3 h-3 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: getProviderColor(selectedModel.provider).color }}
+                />
                 <div className="flex-1">
-                  <div className="text-text-primary font-medium">{selectedModel.id}</div>
-                  <div className="text-text-muted text-sm">{selectedModel.providerDisplayName}</div>
+                  <div className="text-text-primary text-sm font-medium">{selectedModel.id}</div>
+                  <div className="text-text-muted text-xs">{selectedModel.providerDisplayName}</div>
                 </div>
               </>
             ) : (
-              <input
-                type="text"
-                placeholder="Search for a model..."
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value)
-                  setIsDropdownOpen(true)
-                }}
-                onClick={(e) => e.stopPropagation()}
-                className="flex-1 bg-transparent border-none outline-none text-text-primary placeholder:text-text-muted"
-              />
+              <div className="flex items-center gap-2 flex-1 text-text-muted">
+                <Search className="w-4 h-4" />
+                <span className="text-sm">Search for a model...</span>
+              </div>
             )}
-            <ChevronDown className={`w-5 h-5 text-text-muted transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
           </div>
 
           {isDropdownOpen && (
-            <div className="absolute top-full left-0 right-0 mt-2 max-h-80 overflow-y-auto rounded-xl bg-bg-secondary border border-border-color shadow-xl z-50">
-              <div className="p-2">
-                <input
-                  type="text"
-                  placeholder="Search models..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-white/5 border border-border-color text-text-primary placeholder:text-text-muted text-sm outline-none focus:border-white/20"
-                  autoFocus
-                />
+            <div className="absolute top-full left-0 right-0 mt-2 max-h-80 overflow-y-auto rounded-xl bg-bg-secondary border border-border-primary shadow-elevated z-50">
+              <div className="p-2 sticky top-0 bg-bg-secondary border-b border-border-secondary">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
+                  <input
+                    type="text"
+                    placeholder="Search models..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-9 pr-3 py-2 rounded-lg bg-bg-elevated border border-border-secondary text-text-primary placeholder:text-text-muted text-sm outline-none focus:border-accent-primary"
+                    autoFocus
+                  />
+                </div>
               </div>
               {searchResults.map(model => {
-                const gradient = getProviderGradient(model.provider)
+                const providerStyle = getProviderColor(model.provider)
                 return (
                   <button
                     key={`${model.provider}-${model.id}`}
                     onClick={() => selectModel(model)}
-                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-bg-hover transition-colors text-left"
                   >
-                    <div 
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0"
-                      style={{ background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})` }}
-                    >
-                      {model.providerDisplayName.charAt(0)}
-                    </div>
+                    <span 
+                      className="w-3 h-3 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: providerStyle.color }}
+                    />
                     <div className="flex-1 min-w-0">
-                      <div className="text-text-primary font-medium truncate">{model.id}</div>
-                      <div className="text-text-muted text-sm truncate">{model.providerDisplayName}</div>
+                      <div className="text-text-primary text-sm font-medium truncate">{model.id}</div>
+                      <div className="text-text-muted text-xs truncate">{model.providerDisplayName}</div>
                     </div>
-                    <div className="text-right shrink-0">
-                      <div className="text-text-primary text-sm">{formatPrice(model.pricing?.input)}/M</div>
-                      <div className="text-text-muted text-xs">input</div>
+                    <div className="text-right flex-shrink-0">
+                      <div className="text-text-primary text-sm font-mono">{formatPrice(model.pricing?.input)}</div>
+                      <div className="text-text-muted text-xs">per M input</div>
                     </div>
                   </button>
                 )
@@ -159,12 +151,12 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
       </div>
 
       {/* Mode Toggle */}
-      <div className="flex gap-2 p-1 rounded-xl bg-bg-secondary border border-border-color">
+      <div className="flex gap-1 p-1 rounded-lg bg-bg-primary border border-border-primary">
         <button
           onClick={() => setMode('simple')}
-          className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all ${
+          className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
             mode === 'simple' 
-              ? 'bg-white text-black' 
+              ? 'bg-text-primary text-bg-base' 
               : 'text-text-secondary hover:text-text-primary'
           }`}
         >
@@ -172,9 +164,9 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
         </button>
         <button
           onClick={() => setMode('detailed')}
-          className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all ${
+          className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
             mode === 'detailed' 
-              ? 'bg-white text-black' 
+              ? 'bg-text-primary text-bg-base' 
               : 'text-text-secondary hover:text-text-primary'
           }`}
         >
@@ -183,16 +175,16 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
       </div>
 
       {/* Usage Inputs */}
-      <div className="p-6 rounded-2xl bg-bg-secondary border border-border-color space-y-6">
-        <h3 className="text-lg font-medium text-text-primary flex items-center gap-2">
-          <Calculator className="w-5 h-5 text-violet-400" />
+      <div className="p-5 rounded-xl bg-bg-primary border border-border-primary space-y-5">
+        <h3 className="heading-md text-text-primary flex items-center gap-2">
+          <Calculator className="w-5 h-5 text-accent-primary" />
           Usage Estimate
         </h3>
 
         {mode === 'simple' ? (
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5">
             <div>
-              <label className="text-sm text-text-muted mb-2 block">Input Tokens (Monthly)</label>
+              <label className="label mb-2 block">Input Tokens (Monthly)</label>
               <div className="relative">
                 <input
                   type="range"
@@ -201,15 +193,15 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
                   step={100000}
                   value={inputTokens}
                   onChange={(e) => setInputTokens(Number(e.target.value))}
-                  className="w-full h-2 rounded-full bg-white/10 appearance-none cursor-pointer"
+                  className="w-full h-1.5 rounded-full bg-bg-elevated appearance-none cursor-pointer accent-accent-primary"
                 />
-                <div className="mt-2 text-xl font-semibold text-text-primary">
-                  {formatNumber(inputTokens)} tokens
+                <div className="mt-3 text-xl font-semibold text-text-primary font-mono">
+                  {formatNumber(inputTokens)}
                 </div>
               </div>
             </div>
             <div>
-              <label className="text-sm text-text-muted mb-2 block">Output Tokens (Monthly)</label>
+              <label className="label mb-2 block">Output Tokens (Monthly)</label>
               <div className="relative">
                 <input
                   type="range"
@@ -218,42 +210,42 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
                   step={100000}
                   value={outputTokens}
                   onChange={(e) => setOutputTokens(Number(e.target.value))}
-                  className="w-full h-2 rounded-full bg-white/10 appearance-none cursor-pointer"
+                  className="w-full h-1.5 rounded-full bg-bg-elevated appearance-none cursor-pointer accent-accent-secondary"
                 />
-                <div className="mt-2 text-xl font-semibold text-text-primary">
-                  {formatNumber(outputTokens)} tokens
+                <div className="mt-3 text-xl font-semibold text-text-primary font-mono">
+                  {formatNumber(outputTokens)}
                 </div>
               </div>
             </div>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-5">
             <div>
-              <label className="text-sm text-text-muted mb-2 block">Requests per Day</label>
+              <label className="label mb-2 block">Requests per Day</label>
               <input
                 type="number"
                 value={requestsPerDay}
                 onChange={(e) => setRequestsPerDay(Number(e.target.value))}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border-color text-text-primary outline-none focus:border-white/20"
+                className="w-full px-4 py-2.5 rounded-lg bg-bg-secondary border border-border-primary text-text-primary outline-none focus:border-accent-primary transition-colors"
               />
             </div>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-5">
               <div>
-                <label className="text-sm text-text-muted mb-2 block">Avg Input Tokens per Request</label>
+                <label className="label mb-2 block">Avg Input Tokens / Request</label>
                 <input
                   type="number"
                   value={avgInputPerRequest}
                   onChange={(e) => setAvgInputPerRequest(Number(e.target.value))}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border-color text-text-primary outline-none focus:border-white/20"
+                  className="w-full px-4 py-2.5 rounded-lg bg-bg-secondary border border-border-primary text-text-primary outline-none focus:border-accent-primary transition-colors"
                 />
               </div>
               <div>
-                <label className="text-sm text-text-muted mb-2 block">Avg Output Tokens per Request</label>
+                <label className="label mb-2 block">Avg Output Tokens / Request</label>
                 <input
                   type="number"
                   value={avgOutputPerRequest}
                   onChange={(e) => setAvgOutputPerRequest(Number(e.target.value))}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border-color text-text-primary outline-none focus:border-white/20"
+                  className="w-full px-4 py-2.5 rounded-lg bg-bg-secondary border border-border-primary text-text-primary outline-none focus:border-accent-primary transition-colors"
                 />
               </div>
             </div>
@@ -263,37 +255,40 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
 
       {/* Cost Breakdown */}
       {selectedModel && costs && (
-        <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20">
-          <h3 className="text-lg font-medium text-text-primary mb-6 flex items-center gap-2">
-            <DollarSign className="w-5 h-5 text-emerald-400" />
+        <div className="p-5 rounded-xl bg-bg-primary border border-accent-primary/30 relative overflow-hidden">
+          {/* Accent Line */}
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-accent-primary" />
+          
+          <h3 className="heading-md text-text-primary mb-5 flex items-center gap-2">
+            <DollarSign className="w-5 h-5 text-success" />
             Monthly Cost Estimate
           </h3>
 
-          <div className="grid md:grid-cols-3 gap-4 mb-6">
-            <div className="p-4 rounded-xl bg-white/5">
-              <div className="text-sm text-text-muted mb-1">Input Cost</div>
-              <div className="text-2xl font-semibold text-text-primary">
+          <div className="grid md:grid-cols-3 gap-3 mb-5">
+            <div className="p-4 rounded-lg bg-bg-secondary border border-border-secondary">
+              <div className="label mb-1">Input Cost</div>
+              <div className="text-2xl font-semibold text-text-primary font-mono">
                 ${costs.inputCost.toFixed(2)}
               </div>
               <div className="text-xs text-text-muted mt-1">
-                {formatNumber(costs.totalInputTokens)} tokens × {formatPrice(selectedModel.pricing?.input)}/M
+                {formatNumber(costs.totalInputTokens)} × {formatPrice(selectedModel.pricing?.input)}/M
               </div>
             </div>
-            <div className="p-4 rounded-xl bg-white/5">
-              <div className="text-sm text-text-muted mb-1">Output Cost</div>
-              <div className="text-2xl font-semibold text-text-primary">
+            <div className="p-4 rounded-lg bg-bg-secondary border border-border-secondary">
+              <div className="label mb-1">Output Cost</div>
+              <div className="text-2xl font-semibold text-text-primary font-mono">
                 ${costs.outputCost.toFixed(2)}
               </div>
               <div className="text-xs text-text-muted mt-1">
-                {formatNumber(costs.totalOutputTokens)} tokens × {formatPrice(selectedModel.pricing?.output)}/M
+                {formatNumber(costs.totalOutputTokens)} × {formatPrice(selectedModel.pricing?.output)}/M
               </div>
             </div>
-            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-              <div className="text-sm text-emerald-400 mb-1">Total Monthly</div>
-              <div className="text-3xl font-bold text-emerald-400">
+            <div className="p-4 rounded-lg bg-success/10 border border-success/20">
+              <div className="label text-success mb-1">Total Monthly</div>
+              <div className="text-3xl font-bold text-success font-mono">
                 ${costs.totalCost.toFixed(2)}
               </div>
-              <div className="text-xs text-emerald-400/60 mt-1">
+              <div className="text-xs text-success/70 mt-1">
                 ~${(costs.totalCost / 30).toFixed(2)}/day
               </div>
             </div>
@@ -301,9 +296,9 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
 
           <div className="flex items-center justify-center gap-2 text-sm text-text-muted">
             <span>Want to compare?</span>
-            <a href="/compare" className="text-violet-400 hover:text-violet-300 flex items-center gap-1">
+            <a href="/compare" className="text-accent-primary hover:underline flex items-center gap-1">
               Compare models
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
@@ -311,9 +306,9 @@ export default function PriceCalculator({ models, providers }: PriceCalculatorPr
 
       {/* No Model Selected */}
       {!selectedModel && (
-        <div className="p-12 rounded-2xl border border-dashed border-border-color text-center">
-          <Calculator className="w-12 h-12 text-text-muted mx-auto mb-4" />
-          <p className="text-text-muted">Select a model above to calculate costs</p>
+        <div className="p-12 rounded-xl border border-dashed border-border-primary text-center bg-bg-primary">
+          <Calculator className="w-10 h-10 text-text-faint mx-auto mb-3" />
+          <p className="text-text-muted text-sm">Select a model above to calculate costs</p>
         </div>
       )}
     </div>

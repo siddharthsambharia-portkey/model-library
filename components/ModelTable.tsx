@@ -13,11 +13,11 @@ import {
   Check,
   ArrowUpDown,
   X,
-  Filter
+  SlidersHorizontal
 } from 'lucide-react'
 import Fuse from 'fuse.js'
 import { Model, Provider, formatPrice, formatContextWindow } from '@/lib/types'
-import { getProviderGradient } from '@/lib/gradients'
+import { getProviderColor } from '@/lib/gradients'
 
 interface ModelTableProps {
   models: Model[]
@@ -135,21 +135,22 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
   }
 
   const SortIcon = ({ field }: { field: SortField }) => {
-    if (sortField !== field) return <ArrowUpDown className="w-3.5 h-3.5 opacity-40" />
+    if (sortField !== field) return <ArrowUpDown className="w-3 h-3 opacity-30" />
     return sortDirection === 'asc' 
-      ? <ChevronUp className="w-3.5 h-3.5" /> 
-      : <ChevronDown className="w-3.5 h-3.5" />
+      ? <ChevronUp className="w-3 h-3 text-accent-primary" /> 
+      : <ChevronDown className="w-3 h-3 text-accent-primary" />
   }
 
   const hasActiveFilters = selectedProviders.length > 0 || selectedFeatures.length > 0 || search.trim()
+  const activeFilterCount = selectedProviders.length + selectedFeatures.length + (search ? 1 : 0)
 
   return (
     <div className="model-table-section">
       {/* Search and Filter Bar */}
-      <div className="mb-6 space-y-4">
-        <div className="flex items-center gap-4">
+      <div className="mb-4 space-y-3">
+        <div className="flex items-center gap-3">
           {/* Search */}
-          <div className="relative flex-1 max-w-md">
+          <div className="relative flex-1 max-w-sm">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
             <input
               type="text"
@@ -161,9 +162,9 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
             {search && (
               <button 
                 onClick={() => setSearch('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded text-text-muted hover:text-text-primary hover:bg-bg-elevated transition-all"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
@@ -171,17 +172,17 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
           {/* Filter Toggle */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border transition-all ${
+            className={`flex items-center gap-2 px-3 py-2.5 rounded-md border text-sm font-medium transition-all ${
               showFilters || hasActiveFilters
-                ? 'border-white/20 bg-white/10 text-text-primary'
-                : 'border-border-color text-text-secondary hover:text-text-primary hover:border-white/20'
+                ? 'border-accent-primary/50 bg-accent-primary/10 text-accent-primary'
+                : 'border-border-primary bg-bg-secondary text-text-secondary hover:text-text-primary hover:border-border-hover'
             }`}
           >
-            <Filter className="w-4 h-4" />
-            <span className="text-sm font-medium">Filters</span>
-            {hasActiveFilters && (
-              <span className="w-5 h-5 rounded-full bg-violet-500 text-xs flex items-center justify-center">
-                {selectedProviders.length + selectedFeatures.length + (search ? 1 : 0)}
+            <SlidersHorizontal className="w-4 h-4" />
+            <span className="hidden sm:inline">Filters</span>
+            {activeFilterCount > 0 && (
+              <span className="w-5 h-5 rounded-full bg-accent-primary text-bg-base text-xs flex items-center justify-center font-medium">
+                {activeFilterCount}
               </span>
             )}
           </button>
@@ -190,56 +191,64 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="text-sm text-text-muted hover:text-text-primary transition-colors"
+              className="text-sm text-text-muted hover:text-accent-primary transition-colors"
             >
-              Clear all
+              Clear
             </button>
           )}
 
           {/* Results Count */}
-          <div className="ml-auto text-sm text-text-muted">
-            {filteredModels.length} {filteredModels.length === 1 ? 'model' : 'models'}
+          <div className="ml-auto text-sm text-text-muted font-mono">
+            {filteredModels.length.toLocaleString()}
           </div>
         </div>
 
         {/* Filter Panel */}
         {showFilters && (
-          <div className="p-4 rounded-xl bg-bg-secondary border border-border-color space-y-4">
+          <div className="p-4 rounded-xl bg-bg-secondary border border-border-primary space-y-4 animate-fade-in">
             {/* Provider Filter */}
             <div>
-              <label className="text-xs font-medium text-text-muted uppercase tracking-wider mb-2 block">
+              <label className="label mb-2 block">
                 Providers
               </label>
               <div className="flex flex-wrap gap-2">
-                {providers.slice(0, 12).map(provider => (
-                  <button
-                    key={provider.id}
-                    onClick={() => toggleProvider(provider.id)}
-                    className={`px-3 py-1.5 rounded-full text-sm transition-all ${
-                      selectedProviders.includes(provider.id)
-                        ? 'bg-violet-500/20 text-violet-300 border border-violet-500/30'
-                        : 'bg-white/5 text-text-secondary border border-transparent hover:bg-white/10'
-                    }`}
-                  >
-                    {provider.name}
-                    <span className="ml-1.5 text-text-muted">({provider.modelCount})</span>
-                  </button>
-                ))}
+                {providers.slice(0, 15).map(provider => {
+                  const providerStyle = getProviderColor(provider.id)
+                  const isSelected = selectedProviders.includes(provider.id)
+                  return (
+                    <button
+                      key={provider.id}
+                      onClick={() => toggleProvider(provider.id)}
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-sm transition-all ${
+                        isSelected
+                          ? 'bg-bg-elevated border border-border-hover text-text-primary'
+                          : 'bg-bg-primary border border-border-secondary text-text-secondary hover:border-border-primary hover:text-text-primary'
+                      }`}
+                    >
+                      <span 
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: providerStyle.color }}
+                      />
+                      {provider.name}
+                      <span className="text-text-muted text-xs">({provider.modelCount})</span>
+                    </button>
+                  )
+                })}
               </div>
             </div>
 
             {/* Feature Filter */}
             <div>
-              <label className="text-xs font-medium text-text-muted uppercase tracking-wider mb-2 block">
+              <label className="label mb-2 block">
                 Features
               </label>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => toggleFeature('vision')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all ${
                     selectedFeatures.includes('vision')
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                      : 'bg-white/5 text-text-secondary border border-transparent hover:bg-white/10'
+                      ? 'badge-vision'
+                      : 'bg-bg-primary border border-border-secondary text-text-secondary hover:border-border-primary hover:text-text-primary'
                   }`}
                 >
                   <Eye className="w-3.5 h-3.5" />
@@ -247,21 +256,21 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
                 </button>
                 <button
                   onClick={() => toggleFeature('tools')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all ${
                     selectedFeatures.includes('tools')
-                      ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                      : 'bg-white/5 text-text-secondary border border-transparent hover:bg-white/10'
+                      ? 'badge-tools'
+                      : 'bg-bg-primary border border-border-secondary text-text-secondary hover:border-border-primary hover:text-text-primary'
                   }`}
                 >
                   <Wrench className="w-3.5 h-3.5" />
-                  Tool Calling
+                  Tools
                 </button>
                 <button
                   onClick={() => toggleFeature('reasoning')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all ${
                     selectedFeatures.includes('reasoning')
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                      : 'bg-white/5 text-text-secondary border border-transparent hover:bg-white/10'
+                      ? 'badge-reasoning'
+                      : 'bg-bg-primary border border-border-secondary text-text-secondary hover:border-border-primary hover:text-text-primary'
                   }`}
                 >
                   <Brain className="w-3.5 h-3.5" />
@@ -274,73 +283,73 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border border-border-color overflow-hidden">
+      <div className="rounded-xl border border-border-primary overflow-hidden bg-bg-primary">
         <div className="overflow-x-auto">
-          <table className="model-table w-full">
-            <thead className="bg-bg-secondary">
+          <table className="data-table w-full">
+            <thead>
               <tr>
                 <th 
-                  className="cursor-pointer hover:bg-white/5 transition-colors"
+                  className="cursor-pointer hover:bg-bg-hover transition-colors"
                   onClick={() => handleSort('provider')}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     Provider
                     <SortIcon field="provider" />
                   </div>
                 </th>
                 <th 
-                  className="cursor-pointer hover:bg-white/5 transition-colors"
+                  className="cursor-pointer hover:bg-bg-hover transition-colors"
                   onClick={() => handleSort('name')}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     Model
                     <SortIcon field="name" />
                   </div>
                 </th>
                 <th 
-                  className="cursor-pointer hover:bg-white/5 transition-colors"
+                  className="cursor-pointer hover:bg-bg-hover transition-colors"
                   onClick={() => handleSort('context')}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     Output
                     <SortIcon field="context" />
                   </div>
                 </th>
                 <th 
-                  className="cursor-pointer hover:bg-white/5 transition-colors"
+                  className="cursor-pointer hover:bg-bg-hover transition-colors"
                   onClick={() => handleSort('inputPrice')}
                 >
-                  <div className="flex items-center gap-2">
-                    Input
+                  <div className="flex items-center gap-1.5">
+                    Input $/M
                     <SortIcon field="inputPrice" />
                   </div>
                 </th>
                 <th 
-                  className="cursor-pointer hover:bg-white/5 transition-colors"
+                  className="cursor-pointer hover:bg-bg-hover transition-colors"
                   onClick={() => handleSort('outputPrice')}
                 >
-                  <div className="flex items-center gap-2">
-                    Output
+                  <div className="flex items-center gap-1.5">
+                    Output $/M
                     <SortIcon field="outputPrice" />
                   </div>
                 </th>
                 <th>Features</th>
-                <th></th>
+                <th className="w-10"></th>
               </tr>
             </thead>
             <tbody>
               {filteredModels.map((model) => {
-                const gradient = getProviderGradient(model.provider)
+                const providerStyle = getProviderColor(model.provider)
                 return (
                   <tr key={`${model.provider}-${model.id}`} className="group">
                     <td>
                       <Link 
                         href={`/models/${model.provider}`}
-                        className="flex items-center gap-2 hover:text-text-primary transition-colors"
+                        className="inline-flex items-center gap-2 hover:text-text-primary transition-colors"
                       >
-                        <div 
-                          className="w-2 h-2 rounded-full"
-                          style={{ background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})` }}
+                        <span 
+                          className="w-2 h-2 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: providerStyle.color }}
                         />
                         <span className="text-text-secondary group-hover:text-text-primary transition-colors">
                           {model.providerDisplayName}
@@ -350,52 +359,52 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
                     <td>
                       <Link 
                         href={`/models/${model.provider}/${model.id}`}
-                        className="font-medium text-text-primary hover:text-violet-400 transition-colors"
+                        className="font-medium text-text-primary hover:text-accent-primary transition-colors"
                       >
                         {model.id}
                       </Link>
                     </td>
-                    <td className="text-text-secondary">
+                    <td className="font-mono text-text-secondary">
                       {formatContextWindow(model.maxOutputTokens)}
                     </td>
-                    <td className="text-text-secondary">
-                      {formatPrice(model.pricing?.input)}<span className="text-text-muted">/M</span>
+                    <td className="font-mono">
+                      <span className="text-text-primary">{formatPrice(model.pricing?.input)}</span>
                     </td>
-                    <td className="text-text-secondary">
-                      {formatPrice(model.pricing?.output)}<span className="text-text-muted">/M</span>
+                    <td className="font-mono">
+                      <span className="text-text-primary">{formatPrice(model.pricing?.output)}</span>
                     </td>
                     <td>
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1">
                         {model.features.vision && (
-                          <span className="feature-badge active" title="Vision">
+                          <span className="badge badge-vision" title="Vision">
                             <Eye className="w-3 h-3" />
                           </span>
                         )}
                         {model.features.function_calling && (
-                          <span className="feature-badge active" title="Tool Calling">
+                          <span className="badge badge-tools" title="Tool Calling">
                             <Wrench className="w-3 h-3" />
                           </span>
                         )}
                         {model.features.reasoning && (
-                          <span className="feature-badge active" title="Reasoning">
+                          <span className="badge badge-reasoning" title="Reasoning">
                             <Brain className="w-3 h-3" />
                           </span>
                         )}
                         {!model.features.vision && !model.features.function_calling && !model.features.reasoning && (
-                          <span className="text-text-muted text-sm">—</span>
+                          <span className="text-text-faint">—</span>
                         )}
                       </div>
                     </td>
                     <td>
                       <button
                         onClick={() => copyToClipboard(model.id, model.id)}
-                        className="p-1.5 rounded-md hover:bg-white/10 text-text-muted hover:text-text-primary transition-all opacity-0 group-hover:opacity-100"
+                        className="p-1.5 rounded-md hover:bg-bg-elevated text-text-muted hover:text-text-primary transition-all opacity-0 group-hover:opacity-100"
                         title="Copy model ID"
                       >
                         {copiedId === model.id ? (
-                          <Check className="w-4 h-4 text-emerald-400" />
+                          <Check className="w-3.5 h-3.5 text-success" />
                         ) : (
-                          <Copy className="w-4 h-4" />
+                          <Copy className="w-3.5 h-3.5" />
                         )}
                       </button>
                     </td>
@@ -408,12 +417,12 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
 
         {filteredModels.length === 0 && (
           <div className="py-16 text-center">
-            <p className="text-text-muted">No models found matching your criteria.</p>
+            <p className="text-text-muted mb-3">No models found</p>
             <button 
               onClick={clearFilters}
-              className="mt-4 text-sm text-violet-400 hover:text-violet-300"
+              className="text-sm text-accent-primary hover:underline"
             >
-              Clear filters
+              Clear all filters
             </button>
           </div>
         )}

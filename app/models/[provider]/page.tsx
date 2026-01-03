@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ExternalLink } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import Header from '@/components/Header'
 import ModelTable from '@/components/ModelTable'
 import { getModelsByProvider, getProviders } from '@/lib/models'
-import { getProviderGradient } from '@/lib/gradients'
+import { getProviderColor } from '@/lib/gradients'
 
 interface ProviderPageProps {
   params: Promise<{ provider: string }>
@@ -40,36 +40,34 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
     notFound()
   }
 
-  const gradient = getProviderGradient(provider)
+  const providerStyle = getProviderColor(provider)
 
   return (
-    <main className="min-h-screen bg-bg-primary">
+    <main className="min-h-screen bg-bg-base">
       <Header />
       
-      <div className="pt-24 px-8 max-w-[1400px] mx-auto">
+      <div className="pt-20 px-4 md:px-6 max-w-[1400px] mx-auto pb-16">
         {/* Breadcrumb */}
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to all models
-        </Link>
+        <nav className="flex items-center gap-1.5 text-sm text-text-muted mb-8">
+          <Link href="/" className="hover:text-text-primary transition-colors">Models</Link>
+          <ChevronRight className="w-3.5 h-3.5" />
+          <span className="text-text-secondary">{providerData.name}</span>
+        </nav>
 
         {/* Provider Header */}
-        <div className="mb-12">
-          <div className="flex items-center gap-4 mb-4">
+        <div className="mb-10">
+          <div className="flex items-center gap-4 mb-2">
             <div 
-              className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg"
-              style={{ background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})` }}
+              className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-semibold text-lg"
+              style={{ backgroundColor: providerStyle.color }}
             >
               {providerData.name.charAt(0)}
             </div>
             <div>
-              <h1 className="text-3xl font-semibold text-text-primary">
+              <h1 className="display-md text-text-primary">
                 {providerData.name}
               </h1>
-              <p className="text-text-secondary">
+              <p className="text-text-secondary text-sm">
                 {providerData.modelCount} models available
               </p>
             </div>
@@ -89,4 +87,3 @@ export async function generateStaticParams() {
     provider: provider.id,
   }))
 }
-

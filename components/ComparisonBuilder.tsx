@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { X, Plus, Download, Link as LinkIcon, Check, Eye, Wrench, Brain, ChevronDown } from 'lucide-react'
+import { X, Plus, Download, Link as LinkIcon, Check, Eye, Wrench, Brain, ChevronDown, Search } from 'lucide-react'
 import Fuse from 'fuse.js'
 import { Model, Provider, formatPrice, formatContextWindow } from '@/lib/types'
-import { getProviderGradient } from '@/lib/gradients'
+import { getProviderColor } from '@/lib/gradients'
 
 interface ComparisonBuilderProps {
   models: Model[]
@@ -74,10 +74,10 @@ export default function ComparisonBuilder({ models, providers }: ComparisonBuild
       <div className="mb-8">
         <div className="relative max-w-md mx-auto">
           <div
-            className="flex items-center gap-2 px-4 py-3 rounded-xl bg-bg-secondary border border-border-color cursor-pointer"
+            className="flex items-center gap-2 px-4 py-3 rounded-xl bg-bg-secondary border border-border-primary cursor-pointer hover:border-border-hover transition-colors"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
-            <Plus className="w-5 h-5 text-text-muted" />
+            <Search className="w-4 h-4 text-text-muted" />
             <input
               type="text"
               placeholder={selectedModels.length >= 4 ? 'Maximum 4 models' : 'Add a model to compare...'}
@@ -88,36 +88,34 @@ export default function ComparisonBuilder({ models, providers }: ComparisonBuild
               }}
               onClick={(e) => e.stopPropagation()}
               disabled={selectedModels.length >= 4}
-              className="flex-1 bg-transparent border-none outline-none text-text-primary placeholder:text-text-muted disabled:cursor-not-allowed"
+              className="flex-1 bg-transparent border-none outline-none text-text-primary text-sm placeholder:text-text-muted disabled:cursor-not-allowed"
             />
-            <ChevronDown className={`w-5 h-5 text-text-muted transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-4 h-4 text-text-muted transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
           </div>
 
           {isDropdownOpen && selectedModels.length < 4 && (
-            <div className="absolute top-full left-0 right-0 mt-2 max-h-80 overflow-y-auto rounded-xl bg-bg-secondary border border-border-color shadow-xl z-50">
+            <div className="absolute top-full left-0 right-0 mt-2 max-h-80 overflow-y-auto rounded-xl bg-bg-secondary border border-border-primary shadow-elevated z-50">
               {searchResults.map(model => {
                 const isSelected = selectedModels.find(m => m.id === model.id && m.provider === model.provider)
-                const gradient = getProviderGradient(model.provider)
+                const providerStyle = getProviderColor(model.provider)
                 
                 return (
                   <button
                     key={`${model.provider}-${model.id}`}
                     onClick={() => !isSelected && addModel(model)}
                     disabled={!!isSelected}
-                    className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors text-left ${isSelected ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-bg-hover transition-colors text-left ${isSelected ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
-                    <div 
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0"
-                      style={{ background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})` }}
-                    >
-                      {model.providerDisplayName.charAt(0)}
-                    </div>
+                    <span 
+                      className="w-3 h-3 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: providerStyle.color }}
+                    />
                     <div className="flex-1 min-w-0">
-                      <div className="text-text-primary font-medium truncate">{model.id}</div>
-                      <div className="text-text-muted text-sm truncate">{model.providerDisplayName}</div>
+                      <div className="text-text-primary text-sm font-medium truncate">{model.id}</div>
+                      <div className="text-text-muted text-xs truncate">{model.providerDisplayName}</div>
                     </div>
                     {isSelected && (
-                      <Check className="w-5 h-5 text-emerald-400 shrink-0" />
+                      <Check className="w-4 h-4 text-success flex-shrink-0" />
                     )}
                   </button>
                 )
@@ -130,20 +128,20 @@ export default function ComparisonBuilder({ models, providers }: ComparisonBuild
         {selectedModels.length > 0 && (
           <div className="flex flex-wrap justify-center gap-2 mt-4">
             {selectedModels.map((model, index) => {
-              const gradient = getProviderGradient(model.provider)
+              const providerStyle = getProviderColor(model.provider)
               return (
                 <div
                   key={`${model.provider}-${model.id}`}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-border-color"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg-secondary border border-border-primary"
                 >
-                  <div 
-                    className="w-4 h-4 rounded-full"
-                    style={{ background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})` }}
+                  <span 
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: providerStyle.color }}
                   />
                   <span className="text-sm text-text-primary">{model.id}</span>
                   <button
                     onClick={() => removeModel(index)}
-                    className="p-0.5 rounded-full hover:bg-white/10 text-text-muted hover:text-text-primary"
+                    className="p-0.5 rounded-full hover:bg-bg-hover text-text-muted hover:text-text-primary transition-colors"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -156,25 +154,23 @@ export default function ComparisonBuilder({ models, providers }: ComparisonBuild
 
       {/* Comparison Table */}
       {selectedModels.length > 0 && (
-        <div className="rounded-xl border border-border-color overflow-hidden">
+        <div className="rounded-xl border border-border-primary overflow-hidden bg-bg-primary">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-bg-secondary">
-                <tr>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-text-muted uppercase tracking-wider">
+              <thead>
+                <tr className="bg-bg-secondary">
+                  <th className="px-5 py-4 text-left text-xs font-medium text-text-muted uppercase tracking-wider border-b border-border-primary">
                     Attribute
                   </th>
                   {selectedModels.map(model => {
-                    const gradient = getProviderGradient(model.provider)
+                    const providerStyle = getProviderColor(model.provider)
                     return (
-                      <th key={`${model.provider}-${model.id}`} className="px-6 py-4 text-left">
+                      <th key={`${model.provider}-${model.id}`} className="px-5 py-4 text-left border-b border-border-primary">
                         <div className="flex items-center gap-2">
-                          <div 
-                            className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold"
-                            style={{ background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})` }}
-                          >
-                            {model.providerDisplayName.charAt(0)}
-                          </div>
+                          <span 
+                            className="w-3 h-3 rounded-full flex-shrink-0"
+                            style={{ backgroundColor: providerStyle.color }}
+                          />
                           <div>
                             <div className="text-sm font-medium text-text-primary">{model.id}</div>
                             <div className="text-xs text-text-muted">{model.providerDisplayName}</div>
@@ -186,79 +182,79 @@ export default function ComparisonBuilder({ models, providers }: ComparisonBuild
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t border-border-color">
-                  <td className="px-6 py-4 text-sm text-text-muted">Input Price</td>
+                <tr className="border-b border-border-secondary hover:bg-bg-secondary/50 transition-colors">
+                  <td className="px-5 py-4 text-sm text-text-muted">Input Price</td>
                   {selectedModels.map(model => (
-                    <td key={`${model.provider}-${model.id}-input`} className="px-6 py-4 text-text-primary font-medium">
-                      {formatPrice(model.pricing?.input)}<span className="text-text-muted text-sm">/M</span>
+                    <td key={`${model.provider}-${model.id}-input`} className="px-5 py-4 text-text-primary font-mono text-sm">
+                      {formatPrice(model.pricing?.input)}<span className="text-text-muted">/M</span>
                     </td>
                   ))}
                 </tr>
-                <tr className="border-t border-border-color">
-                  <td className="px-6 py-4 text-sm text-text-muted">Output Price</td>
+                <tr className="border-b border-border-secondary hover:bg-bg-secondary/50 transition-colors">
+                  <td className="px-5 py-4 text-sm text-text-muted">Output Price</td>
                   {selectedModels.map(model => (
-                    <td key={`${model.provider}-${model.id}-output`} className="px-6 py-4 text-text-primary font-medium">
-                      {formatPrice(model.pricing?.output)}<span className="text-text-muted text-sm">/M</span>
+                    <td key={`${model.provider}-${model.id}-output`} className="px-5 py-4 text-text-primary font-mono text-sm">
+                      {formatPrice(model.pricing?.output)}<span className="text-text-muted">/M</span>
                     </td>
                   ))}
                 </tr>
-                <tr className="border-t border-border-color">
-                  <td className="px-6 py-4 text-sm text-text-muted">Max Output</td>
+                <tr className="border-b border-border-secondary hover:bg-bg-secondary/50 transition-colors">
+                  <td className="px-5 py-4 text-sm text-text-muted">Max Output</td>
                   {selectedModels.map(model => (
-                    <td key={`${model.provider}-${model.id}-context`} className="px-6 py-4 text-text-primary font-medium">
+                    <td key={`${model.provider}-${model.id}-context`} className="px-5 py-4 text-text-primary font-mono text-sm">
                       {formatContextWindow(model.maxOutputTokens)}
                     </td>
                   ))}
                 </tr>
-                <tr className="border-t border-border-color">
-                  <td className="px-6 py-4 text-sm text-text-muted">Vision</td>
+                <tr className="border-b border-border-secondary hover:bg-bg-secondary/50 transition-colors">
+                  <td className="px-5 py-4 text-sm text-text-muted">Vision</td>
                   {selectedModels.map(model => (
-                    <td key={`${model.provider}-${model.id}-vision`} className="px-6 py-4">
+                    <td key={`${model.provider}-${model.id}-vision`} className="px-5 py-4">
                       {model.features.vision ? (
-                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-emerald-500/10 text-emerald-400 text-sm">
-                          <Eye className="w-3.5 h-3.5" /> Yes
+                        <span className="badge badge-vision">
+                          <Eye className="w-3 h-3" /> Yes
                         </span>
                       ) : (
-                        <span className="text-text-muted">—</span>
+                        <span className="text-text-faint">—</span>
                       )}
                     </td>
                   ))}
                 </tr>
-                <tr className="border-t border-border-color">
-                  <td className="px-6 py-4 text-sm text-text-muted">Tool Calling</td>
+                <tr className="border-b border-border-secondary hover:bg-bg-secondary/50 transition-colors">
+                  <td className="px-5 py-4 text-sm text-text-muted">Tool Calling</td>
                   {selectedModels.map(model => (
-                    <td key={`${model.provider}-${model.id}-tools`} className="px-6 py-4">
+                    <td key={`${model.provider}-${model.id}-tools`} className="px-5 py-4">
                       {model.features.function_calling ? (
-                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-blue-500/10 text-blue-400 text-sm">
-                          <Wrench className="w-3.5 h-3.5" /> Yes
+                        <span className="badge badge-tools">
+                          <Wrench className="w-3 h-3" /> Yes
                         </span>
                       ) : (
-                        <span className="text-text-muted">—</span>
+                        <span className="text-text-faint">—</span>
                       )}
                     </td>
                   ))}
                 </tr>
-                <tr className="border-t border-border-color">
-                  <td className="px-6 py-4 text-sm text-text-muted">Reasoning</td>
+                <tr className="border-b border-border-secondary hover:bg-bg-secondary/50 transition-colors">
+                  <td className="px-5 py-4 text-sm text-text-muted">Reasoning</td>
                   {selectedModels.map(model => (
-                    <td key={`${model.provider}-${model.id}-reasoning`} className="px-6 py-4">
+                    <td key={`${model.provider}-${model.id}-reasoning`} className="px-5 py-4">
                       {model.features.reasoning ? (
-                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-amber-500/10 text-amber-400 text-sm">
-                          <Brain className="w-3.5 h-3.5" /> Yes
+                        <span className="badge badge-reasoning">
+                          <Brain className="w-3 h-3" /> Yes
                         </span>
                       ) : (
-                        <span className="text-text-muted">—</span>
+                        <span className="text-text-faint">—</span>
                       )}
                     </td>
                   ))}
                 </tr>
-                <tr className="border-t border-border-color">
-                  <td className="px-6 py-4 text-sm text-text-muted">Input Modality</td>
+                <tr className="border-b border-border-secondary hover:bg-bg-secondary/50 transition-colors">
+                  <td className="px-5 py-4 text-sm text-text-muted">Input Modality</td>
                   {selectedModels.map(model => (
-                    <td key={`${model.provider}-${model.id}-input-mod`} className="px-6 py-4">
+                    <td key={`${model.provider}-${model.id}-input-mod`} className="px-5 py-4">
                       <div className="flex flex-wrap gap-1">
                         {model.modality.input.map(m => (
-                          <span key={m} className="px-2 py-0.5 rounded bg-white/5 text-text-secondary text-sm capitalize">
+                          <span key={m} className="px-2 py-0.5 rounded bg-bg-elevated text-text-secondary text-xs capitalize">
                             {m}
                           </span>
                         ))}
@@ -266,13 +262,13 @@ export default function ComparisonBuilder({ models, providers }: ComparisonBuild
                     </td>
                   ))}
                 </tr>
-                <tr className="border-t border-border-color">
-                  <td className="px-6 py-4 text-sm text-text-muted">Output Modality</td>
+                <tr className="hover:bg-bg-secondary/50 transition-colors">
+                  <td className="px-5 py-4 text-sm text-text-muted">Output Modality</td>
                   {selectedModels.map(model => (
-                    <td key={`${model.provider}-${model.id}-output-mod`} className="px-6 py-4">
+                    <td key={`${model.provider}-${model.id}-output-mod`} className="px-5 py-4">
                       <div className="flex flex-wrap gap-1">
                         {model.modality.output.map(m => (
-                          <span key={m} className="px-2 py-0.5 rounded bg-white/5 text-text-secondary text-sm capitalize">
+                          <span key={m} className="px-2 py-0.5 rounded bg-bg-elevated text-text-secondary text-xs capitalize">
                             {m}
                           </span>
                         ))}
@@ -291,18 +287,18 @@ export default function ComparisonBuilder({ models, providers }: ComparisonBuild
         <div className="flex justify-center gap-3 mt-8">
           <button
             onClick={downloadComparison}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-medium hover:bg-white/90 transition-colors"
+            className="btn btn-primary btn-lg"
           >
             <Download className="w-4 h-4" />
             Download Card
           </button>
           <button
             onClick={copyLink}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition-colors border border-white/10"
+            className="btn btn-secondary btn-lg"
           >
             {copied ? (
               <>
-                <Check className="w-4 h-4 text-emerald-400" />
+                <Check className="w-4 h-4 text-success" />
                 Copied!
               </>
             ) : (
@@ -317,9 +313,12 @@ export default function ComparisonBuilder({ models, providers }: ComparisonBuild
 
       {/* Empty State */}
       {selectedModels.length === 0 && (
-        <div className="text-center py-16 text-text-muted">
-          <p className="mb-2">Select models above to start comparing</p>
-          <p className="text-sm">You can compare up to 4 models side by side</p>
+        <div className="text-center py-20">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-bg-secondary flex items-center justify-center">
+            <Plus className="w-8 h-8 text-text-muted" />
+          </div>
+          <p className="text-text-secondary mb-2">Select models above to start comparing</p>
+          <p className="text-sm text-text-muted">You can compare up to 4 models side by side</p>
         </div>
       )}
     </div>

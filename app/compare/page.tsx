@@ -13,15 +13,15 @@ export default async function ComparePage() {
   const providers = await getProviders()
 
   return (
-    <main className="min-h-screen bg-bg-primary">
+    <main className="min-h-screen bg-bg-base">
       <Header />
       
-      <div className="pt-24 px-8 max-w-[1400px] mx-auto pb-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-semibold text-text-primary mb-4">
-            Compare AI Models
+      <div className="pt-24 px-4 md:px-6 max-w-[1400px] mx-auto pb-16">
+        <div className="text-center mb-10">
+          <h1 className="display-md text-text-primary mb-4">
+            Compare <span className="text-accent-primary">Models</span>
           </h1>
-          <p className="text-text-secondary max-w-xl mx-auto">
+          <p className="body-md text-text-secondary max-w-xl mx-auto">
             Select up to 4 models to compare side by side. Find the perfect model for your use case.
           </p>
         </div>
@@ -31,4 +31,3 @@ export default async function ComparePage() {
     </main>
   )
 }
-

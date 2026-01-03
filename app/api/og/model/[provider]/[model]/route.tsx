@@ -1,9 +1,9 @@
 import { ImageResponse } from '@vercel/og'
 import { getModel } from '@/lib/models'
 import { formatPrice, formatContextWindow } from '@/lib/types'
-import { getProviderGradient } from '@/lib/gradients'
+import { getProviderColor } from '@/lib/gradients'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 export async function GET(
   request: Request,
@@ -16,7 +16,15 @@ export async function GET(
     return new Response('Model not found', { status: 404 })
   }
 
-  const gradient = getProviderGradient(provider)
+  const providerStyle = getProviderColor(provider)
+
+  // Get capabilities
+  const capabilities = []
+  if (model.features.vision) capabilities.push('Vision')
+  if (model.features.function_calling) capabilities.push('Tool Calling')
+  if (model.features.reasoning) capabilities.push('Reasoning')
+  if (model.modality.input.includes('image') && !model.features.vision) capabilities.push('Multimodal')
+  if (capabilities.length === 0) capabilities.push('Text Generation')
 
   return new ImageResponse(
     (
@@ -25,13 +33,11 @@ export async function GET(
           height: '100%',
           width: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          padding: '60px',
-          background: '#000000',
+          background: '#1A1915',
           fontFamily: 'system-ui, sans-serif',
         }}
       >
-        {/* Gradient Background */}
+        {/* Vertical Lines Background */}
         <div
           style={{
             position: 'absolute',
@@ -39,224 +45,152 @@ export async function GET(
             left: 0,
             right: 0,
             bottom: 0,
-            background: `linear-gradient(135deg, ${gradient.from}15, ${gradient.to}15)`,
+            backgroundImage: 'linear-gradient(to right, rgba(237,236,236,0.03) 1px, transparent 1px)',
+            backgroundSize: '60px 100%',
           }}
         />
 
-        {/* Dot Pattern */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: `radial-gradient(circle, ${gradient.from}20 1.5px, transparent 1.5px)`,
-            backgroundSize: '32px 32px',
-          }}
-        />
-
-        {/* Content */}
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
-          {/* Provider Badge */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '32px',
-            }}
-          >
+        <div style={{ display: 'flex', width: '100%', height: '100%', padding: '50px' }}>
+          {/* Left Side - Content */}
+          <div style={{ display: 'flex', flexDirection: 'column', flex: 1, paddingRight: '40px' }}>
+            {/* Provider */}
             <div
               style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '10px',
-                background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                fontSize: '18px',
-                fontWeight: 700,
-              }}
-            >
-              {model.providerDisplayName.charAt(0)}
-            </div>
-            <span
-              style={{
-                fontSize: '18px',
-                fontWeight: 500,
-                color: 'rgba(255, 255, 255, 0.6)',
+                fontSize: '16px',
+                color: 'rgba(237, 236, 236, 0.5)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
+                marginBottom: '40px',
               }}
             >
               {model.providerDisplayName}
-            </span>
-          </div>
+            </div>
 
-          {/* Model Name */}
-          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 'auto' }}>
-            <h1
-              style={{
-                fontSize: '56px',
-                fontWeight: 600,
-                color: 'white',
-                margin: 0,
-                lineHeight: 1.1,
-                letterSpacing: '-0.02em',
-              }}
-            >
-              {model.id}
-            </h1>
-          </div>
-
-          {/* Stats Row */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '20px',
-              marginBottom: '32px',
-            }}
-          >
-            {model.maxOutputTokens && (
+            {/* Capabilities */}
+            <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '40px' }}>
               <div
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  padding: '20px 28px',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  borderRadius: '16px',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  fontSize: '12px',
+                  color: 'rgba(237, 236, 236, 0.4)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.15em',
+                  marginBottom: '16px',
                 }}
               >
-                <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.5)', marginBottom: '4px' }}>
+                Capabilities
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {capabilities.slice(0, 3).map((cap, i) => (
+                  <div key={cap} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <span style={{ color: 'rgba(237, 236, 236, 0.4)', fontSize: '16px', fontFamily: 'monospace', width: '20px' }}>
+                      {i + 1}
+                    </span>
+                    <span style={{ color: '#EDECEC', fontSize: '18px', fontWeight: 500 }}>
+                      {cap}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Stats Grid */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', marginBottom: '40px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontSize: '12px', color: 'rgba(237, 236, 236, 0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>
+                  Input
+                </div>
+                <div style={{ fontSize: '32px', fontWeight: 600, color: '#EDECEC', fontFamily: 'monospace' }}>
+                  {formatPrice(model.pricing?.input)}
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontSize: '12px', color: 'rgba(237, 236, 236, 0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>
                   Output
-                </span>
-                <span style={{ fontSize: '28px', fontWeight: 600, color: 'white' }}>
-                  {formatContextWindow(model.maxOutputTokens)}
+                </div>
+                <div style={{ fontSize: '32px', fontWeight: 600, color: '#EDECEC', fontFamily: 'monospace' }}>
+                  {formatPrice(model.pricing?.output)}
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontSize: '12px', color: 'rgba(237, 236, 236, 0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>
+                  Tokens
+                </div>
+                <div style={{ fontSize: '32px', fontWeight: 600, color: '#EDECEC', fontFamily: 'monospace' }}>
+                  {formatContextWindow(model.maxOutputTokens) || '—'}
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontSize: '12px', color: 'rgba(237, 236, 236, 0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '4px' }}>
+                  Type
+                </div>
+                <div style={{ fontSize: '32px', fontWeight: 600, color: '#EDECEC', textTransform: 'capitalize' }}>
+                  {model.type}
+                </div>
+              </div>
+            </div>
+
+            {/* Model Name */}
+            <div style={{ display: 'flex', flexDirection: 'column', marginTop: 'auto', borderTop: '1px solid rgba(237, 236, 236, 0.08)', paddingTop: '24px' }}>
+              <div style={{ fontSize: '36px', fontWeight: 600, color: '#EDECEC', marginBottom: '8px' }}>
+                {model.name || model.id}
+              </div>
+              
+              {/* Footer */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '12px' }}>
+                <div
+                  style={{
+                    width: '24px',
+                    height: '24px',
+                    borderRadius: '6px',
+                    background: providerStyle.color,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                  }}
+                >
+                  P
+                </div>
+                <span style={{ fontSize: '14px', color: 'rgba(237, 236, 236, 0.4)' }}>
+                  portkey.ai/models
                 </span>
               </div>
-            )}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '20px 28px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-              }}
-            >
-              <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.5)', marginBottom: '4px' }}>
-                Input Price
-              </span>
-              <span style={{ fontSize: '28px', fontWeight: 600, color: 'white' }}>
-                {formatPrice(model.pricing?.input)}/M
-              </span>
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '20px 28px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-              }}
-            >
-              <span style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.5)', marginBottom: '4px' }}>
-                Output Price
-              </span>
-              <span style={{ fontSize: '28px', fontWeight: 600, color: 'white' }}>
-                {formatPrice(model.pricing?.output)}/M
-              </span>
             </div>
           </div>
 
-          {/* Features */}
-          <div style={{ display: 'flex', gap: '12px', marginBottom: '32px' }}>
-            {model.features.vision && (
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '10px 16px',
-                  background: 'rgba(16, 185, 129, 0.15)',
-                  borderRadius: '10px',
-                  border: '1px solid rgba(16, 185, 129, 0.3)',
-                }}
-              >
-                <span style={{ fontSize: '14px', fontWeight: 500, color: '#10B981' }}>
-                  👁️ Vision
-                </span>
+          {/* Right Side - Dot Matrix (simplified to rows of dots) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-end', paddingTop: '60px' }}>
+            {Array.from({ length: 14 }).map((_, rowIndex) => (
+              <div key={rowIndex} style={{ display: 'flex', gap: '8px' }}>
+                {Array.from({ length: 12 }).map((_, colIndex) => {
+                  let color = 'rgba(237, 236, 236, 0.08)'
+                  
+                  if (colIndex === 11) {
+                    if (model.features.vision && rowIndex >= 0 && rowIndex <= 3) {
+                      color = providerStyle.color
+                    } else if (model.features.function_calling && rowIndex >= 4 && rowIndex <= 7) {
+                      color = providerStyle.color
+                    } else if ((model.features.reasoning || (model.pricing?.input || 0) > 5) && rowIndex >= 8 && rowIndex <= 11) {
+                      color = '#F54E00'
+                    }
+                  }
+                  
+                  return (
+                    <div
+                      key={colIndex}
+                      style={{
+                        width: '10px',
+                        height: '10px',
+                        borderRadius: '50%',
+                        background: color,
+                      }}
+                    />
+                  )
+                })}
               </div>
-            )}
-            {model.features.function_calling && (
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '10px 16px',
-                  background: 'rgba(59, 130, 246, 0.15)',
-                  borderRadius: '10px',
-                  border: '1px solid rgba(59, 130, 246, 0.3)',
-                }}
-              >
-                <span style={{ fontSize: '14px', fontWeight: 500, color: '#3B82F6' }}>
-                  🔧 Tools
-                </span>
-              </div>
-            )}
-            {model.features.reasoning && (
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '10px 16px',
-                  background: 'rgba(245, 158, 11, 0.15)',
-                  borderRadius: '10px',
-                  border: '1px solid rgba(245, 158, 11, 0.3)',
-                }}
-              >
-                <span style={{ fontSize: '14px', fontWeight: 500, color: '#F59E0B' }}>
-                  🧠 Reasoning
-                </span>
-              </div>
-            )}
-          </div>
-
-          {/* Footer */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-            }}
-          >
-            <div
-              style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '8px',
-                background: `linear-gradient(135deg, ${gradient.from}, ${gradient.to})`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                fontSize: '14px',
-                fontWeight: 700,
-              }}
-            >
-              P
-            </div>
-            <span style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.5)' }}>
-              portkey.ai/models
-            </span>
+            ))}
           </div>
         </div>
       </div>

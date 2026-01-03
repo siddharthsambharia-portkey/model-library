@@ -9,14 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.20.6",
+    "@vercel/og": "^0.6.4",
+    "clsx": "^2.1.1",
+    "fuse.js": "^7.0.0",
+    "geist": "^1.5.1",
+    "lucide-react": "^0.469.0",
     "next": "14.2.21",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "@vercel/og": "^0.6.4",
-    "@tanstack/react-table": "^8.20.6",
-    "fuse.js": "^7.0.0",
-    "lucide-react": "^0.469.0",
-    "clsx": "^2.1.1"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.17.12",
@@ -30,4 +31,3 @@
     "typescript": "^5.7.2"
   }
 }
-

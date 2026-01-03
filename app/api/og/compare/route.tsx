@@ -3,7 +3,7 @@ import { getModel } from '@/lib/models'
 import { formatPrice, formatContextWindow } from '@/lib/types'
 import { getProviderGradient } from '@/lib/gradients'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)

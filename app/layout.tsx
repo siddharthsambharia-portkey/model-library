@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import JsonLd from '@/components/JsonLd'
 
@@ -33,15 +35,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
         <JsonLd type="website" />
         <JsonLd type="organization" />
       </head>
-      <body className="font-sora">
+      <body className="font-sans antialiased">
+        {/* Background Grid Pattern */}
+        <div className="fixed inset-0 bg-grid-pattern bg-grid opacity-50 pointer-events-none" />
         {children}
       </body>
     </html>

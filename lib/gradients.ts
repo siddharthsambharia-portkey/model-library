@@ -1,162 +1,152 @@
-// Provider-specific gradient definitions for viral model cards
-export const providerGradients: Record<string, {
-  from: string
-  to: string
-  className: string
-  accent: string
+// Provider-specific colors (flat, no gradients - Cursor-inspired)
+export const providerColors: Record<string, {
+  color: string
+  bgClass: string
+  textClass: string
 }> = {
   anthropic: {
-    from: '#FF6B6B',
-    to: '#FFB347',
-    className: 'gradient-anthropic',
-    accent: '#FF8A5B',
+    color: '#D4A574',
+    bgClass: 'bg-provider-anthropic',
+    textClass: 'text-provider-anthropic',
   },
   openai: {
-    from: '#10B981',
-    to: '#06B6D4',
-    className: 'gradient-openai',
-    accent: '#0EA5E9',
+    color: '#10B981',
+    bgClass: 'bg-provider-openai',
+    textClass: 'text-provider-openai',
+  },
+  'open-ai': {
+    color: '#10B981',
+    bgClass: 'bg-provider-openai',
+    textClass: 'text-provider-openai',
   },
   google: {
-    from: '#4F46E5',
-    to: '#7C3AED',
-    className: 'gradient-google',
-    accent: '#6366F1',
+    color: '#4285F4',
+    bgClass: 'bg-provider-google',
+    textClass: 'text-provider-google',
   },
   'vertex-ai': {
-    from: '#4F46E5',
-    to: '#7C3AED',
-    className: 'gradient-google',
-    accent: '#6366F1',
+    color: '#4285F4',
+    bgClass: 'bg-provider-google',
+    textClass: 'text-provider-google',
   },
   meta: {
-    from: '#3B82F6',
-    to: '#6366F1',
-    className: 'gradient-meta',
-    accent: '#4F46E5',
+    color: '#0866FF',
+    bgClass: 'bg-provider-meta',
+    textClass: 'text-provider-meta',
   },
   mistral: {
-    from: '#A855F7',
-    to: '#EC4899',
-    className: 'gradient-mistral',
-    accent: '#D946EF',
+    color: '#FF7000',
+    bgClass: 'bg-provider-mistral',
+    textClass: 'text-provider-mistral',
   },
   'mistral-ai': {
-    from: '#A855F7',
-    to: '#EC4899',
-    className: 'gradient-mistral',
-    accent: '#D946EF',
+    color: '#FF7000',
+    bgClass: 'bg-provider-mistral',
+    textClass: 'text-provider-mistral',
   },
   deepseek: {
-    from: '#1E3A8A',
-    to: '#22D3EE',
-    className: 'gradient-deepseek',
-    accent: '#0891B2',
+    color: '#0891B2',
+    bgClass: 'bg-provider-deepseek',
+    textClass: 'text-provider-deepseek',
   },
   cohere: {
-    from: '#DC2626',
-    to: '#F97316',
-    className: 'gradient-cohere',
-    accent: '#EA580C',
+    color: '#FF5A5A',
+    bgClass: 'bg-provider-cohere',
+    textClass: 'text-provider-cohere',
   },
   'x-ai': {
-    from: '#475569',
-    to: '#94A3B8',
-    className: 'gradient-xai',
-    accent: '#64748B',
+    color: '#A3A3A3',
+    bgClass: 'bg-provider-xai',
+    textClass: 'text-provider-xai',
   },
   groq: {
-    from: '#F97316',
-    to: '#FBBF24',
-    className: 'gradient-groq',
-    accent: '#F59E0B',
+    color: '#F97316',
+    bgClass: 'bg-provider-groq',
+    textClass: 'text-provider-groq',
   },
   'together-ai': {
-    from: '#8B5CF6',
-    to: '#3B82F6',
-    className: 'gradient-together',
-    accent: '#6366F1',
+    color: '#8B5CF6',
+    bgClass: 'bg-provider-together',
+    textClass: 'text-provider-together',
   },
   fireworks: {
-    from: '#EF4444',
-    to: '#F97316',
-    className: 'gradient-fireworks',
-    accent: '#F97316',
+    color: '#EF4444',
+    bgClass: 'bg-provider-fireworks',
+    textClass: 'text-provider-fireworks',
   },
   'fireworks-ai': {
-    from: '#EF4444',
-    to: '#F97316',
-    className: 'gradient-fireworks',
-    accent: '#F97316',
+    color: '#EF4444',
+    bgClass: 'bg-provider-fireworks',
+    textClass: 'text-provider-fireworks',
   },
   perplexity: {
-    from: '#22D3EE',
-    to: '#3B82F6',
-    className: 'gradient-perplexity',
-    accent: '#0EA5E9',
+    color: '#0EA5E9',
+    bgClass: 'bg-provider-perplexity',
+    textClass: 'text-provider-perplexity',
   },
   'perplexity-ai': {
-    from: '#22D3EE',
-    to: '#3B82F6',
-    className: 'gradient-perplexity',
-    accent: '#0EA5E9',
+    color: '#0EA5E9',
+    bgClass: 'bg-provider-perplexity',
+    textClass: 'text-provider-perplexity',
   },
   bedrock: {
-    from: '#F97316',
-    to: '#FBBF24',
-    className: 'gradient-bedrock',
-    accent: '#F59E0B',
+    color: '#FF9900',
+    bgClass: 'bg-provider-bedrock',
+    textClass: 'text-provider-bedrock',
   },
   azure: {
-    from: '#0078D4',
-    to: '#00BCF2',
-    className: 'gradient-azure',
-    accent: '#0EA5E9',
+    color: '#0078D4',
+    bgClass: 'bg-provider-azure',
+    textClass: 'text-provider-azure',
   },
   'azure-openai': {
-    from: '#0078D4',
-    to: '#00BCF2',
-    className: 'gradient-azure',
-    accent: '#0EA5E9',
+    color: '#0078D4',
+    bgClass: 'bg-provider-azure',
+    textClass: 'text-provider-azure',
   },
   'azure-ai': {
-    from: '#0078D4',
-    to: '#00BCF2',
-    className: 'gradient-azure',
-    accent: '#0EA5E9',
+    color: '#0078D4',
+    bgClass: 'bg-provider-azure',
+    textClass: 'text-provider-azure',
   },
   cerebras: {
-    from: '#FF6B35',
-    to: '#FF9F1C',
-    className: 'gradient-cerebras',
-    accent: '#F97316',
+    color: '#FF6B35',
+    bgClass: 'bg-provider-cerebras',
+    textClass: 'text-provider-cerebras',
   },
   ai21: {
-    from: '#4ADE80',
-    to: '#22D3EE',
-    className: 'gradient-ai21',
-    accent: '#2DD4BF',
+    color: '#4ADE80',
+    bgClass: 'bg-provider-ai21',
+    textClass: 'text-provider-ai21',
   },
   'reka-ai': {
-    from: '#F472B6',
-    to: '#A855F7',
-    className: 'gradient-reka',
-    accent: '#D946EF',
+    color: '#F472B6',
+    bgClass: 'bg-provider-reka',
+    textClass: 'text-provider-reka',
   },
   default: {
-    from: '#6366F1',
-    to: '#8B5CF6',
-    className: 'gradient-default',
-    accent: '#7C3AED',
+    color: '#0EA5E9',
+    bgClass: 'bg-accent-primary',
+    textClass: 'text-accent-primary',
   },
 }
 
+export function getProviderColor(providerId: string) {
+  return providerColors[providerId.toLowerCase()] || providerColors.default
+}
+
+// Legacy compatibility - returns flat gradient (same color)
 export function getProviderGradient(providerId: string) {
-  return providerGradients[providerId.toLowerCase()] || providerGradients.default
+  const provider = getProviderColor(providerId)
+  return {
+    from: provider.color,
+    to: provider.color,
+    accent: provider.color,
+    className: provider.bgClass,
+  }
 }
 
 export function getProviderGradientCSS(providerId: string): string {
-  const gradient = getProviderGradient(providerId)
-  return `linear-gradient(135deg, ${gradient.from} 0%, ${gradient.to} 100%)`
+  const provider = getProviderColor(providerId)
+  return provider.color
 }
-
