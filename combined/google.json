@@ -1,0 +1,6976 @@
+{
+  "_defaults": {
+    "message_roles": [
+      "user",
+      "assistant"
+    ],
+    "parameters": [
+      {
+        "defaultValue": 256,
+        "key": "max_tokens",
+        "maxValue": 4096,
+        "minValue": 1
+      },
+      {
+        "defaultValue": 0.7,
+        "key": "temperature",
+        "maxValue": 2,
+        "minValue": 0
+      },
+      {
+        "defaultValue": 1,
+        "key": "top_p",
+        "maxValue": 1,
+        "minValue": 0
+      },
+      {
+        "defaultValue": 40,
+        "key": "top_k",
+        "maxValue": 100,
+        "minValue": 0
+      },
+      {
+        "defaultValue": null,
+        "key": "stop",
+        "skipValues": [
+          null,
+          []
+        ],
+        "type": "array-of-strings"
+      },
+      {
+        "defaultValue": true,
+        "key": "stream",
+        "type": "boolean"
+      },
+      {
+        "defaultValue": null,
+        "key": "tool_choice",
+        "options": [
+          {
+            "name": "None",
+            "value": "none"
+          },
+          {
+            "name": "Auto",
+            "value": "auto"
+          },
+          {
+            "name": "Required",
+            "value": "required"
+          },
+          {
+            "name": "Custom",
+            "schema": {
+              "type": "json"
+            },
+            "value": "custom"
+          }
+        ],
+        "rule": {
+          "default": {
+            "condition": "tools",
+            "else": null,
+            "then": "auto"
+          }
+        },
+        "skipValues": [
+          null,
+          []
+        ],
+        "type": "non-view-manage-data"
+      }
+    ],
+    "pricing_formula": {
+      "request": {
+        "operands": [
+          {
+            "value": "input_tokens"
+          },
+          {
+            "value": "rates.request_token"
+          }
+        ],
+        "operation": "multiply"
+      },
+      "response": {
+        "operands": [
+          {
+            "value": "output_tokens"
+          },
+          {
+            "value": "rates.response_token"
+          }
+        ],
+        "operation": "multiply"
+      }
+    }
+  },
+  "id": "google",
+  "models": {
+    "embedding-001": {
+      "_playground_disabled": true,
+      "id": "embedding-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.025,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "embedding"
+    },
+    "gemini-1.0-pro": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.0-pro",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-1.0-pro-001": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        }
+      ],
+      "features": {
+        "function_calling": true
+      },
+      "id": "gemini-1.0-pro-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.15,
+              "output": 0.6,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-001": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.15,
+              "output": 0.6,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-001-tuning": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-001-tuning",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-002": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-002",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.15,
+              "output": 0.6,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-8b": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-8b",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.0375,
+              "output": 0.15,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-8b-001": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-8b-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.0375,
+              "output": 0.15,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-8b-exp-0827": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-8b-exp-0827",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-8b-exp-0924": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-8b-exp-0924",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-8b-latest": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-8b-latest",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.0375,
+              "output": 0.15,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-exp-0827": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-exp-0827",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-flash-latest": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-flash-latest",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.15,
+              "output": 0.6,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-pro": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-pro",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 1.25,
+              "output": 5,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 2.5,
+              "output": 10,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-pro-001": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-pro-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 1.25,
+              "output": 5,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 2.5,
+              "output": 10,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-pro-002": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-pro-002",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 1.25,
+              "output": 5,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 2.5,
+              "output": 10,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-pro-exp-0801": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-pro-exp-0801",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-pro-exp-0827": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-pro-exp-0827",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-1.5-pro-latest": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-1.5-pro-latest",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 1.25,
+              "output": 5,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 2.5,
+              "output": 10,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.0-flash": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 8192,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "function_calling": true,
+        "vision": true
+      },
+      "id": "gemini-2.0-flash",
+      "max_output_tokens": 8192,
+      "modality": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.1,
+              "output": 0.4,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.1,
+              "output": 0.4,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.0-flash-001": {
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.0-flash-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "currency": "USD",
+        "tokens": {
+          "input": 0.1,
+          "output": 0.4,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "gemini-2.0-flash-exp": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 8192,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.0-flash-exp",
+      "max_output_tokens": 8192,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-2.0-flash-lite": {
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.0-flash-lite",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.075,
+              "output": 0.3,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.0-flash-lite-001": {
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.0-flash-lite-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "currency": "USD",
+        "tokens": {
+          "input": 0.075,
+          "output": 0.3,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "gemini-2.0-flash-lite-preview-02-05": {
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.0-flash-lite-preview-02-05",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-2.0-flash-thinking-exp-01-21": {
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.0-flash-thinking-exp-01-21",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-flash": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 24576,
+              "minValue": 0,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-flash",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "thinking_token": {
+              "price": 0.025
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.3,
+              "output": 2.5,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.3,
+              "output": 2.5,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-flash-image-preview": {
+      "_playground_disabled": true,
+      "id": "gemini-2.5-flash-image-preview",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "image_token": {
+              "price": 0.3
+            },
+            "web_search": {
+              "price": 140
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.3,
+              "output": 0.039,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "cache_write": 0.03,
+              "cached_input": 0.03,
+              "input": 0.3,
+              "output": 2.5,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-flash-lite": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 64000,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 24576,
+              "minValue": 0,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-flash-lite",
+      "max_output_tokens": 64000,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "cache_write": 0.1,
+              "cached_input": 0.01,
+              "input": 0.1,
+              "output": 0.4,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "cache_write": 0.1,
+              "cached_input": 0.01,
+              "input": 0.1,
+              "output": 0.4,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-flash-lite-preview-06-17": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 64000,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 24576,
+              "minValue": 0,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-flash-lite-preview-06-17",
+      "max_output_tokens": 64000,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "thinking_token": {
+              "price": 0.004
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.1,
+              "output": 0.4,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.1,
+              "output": 0.4,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-flash-preview-04-17": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 24576,
+              "minValue": 0,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-flash-preview-04-17",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "thinking_token": {
+              "price": 0.035
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.15,
+              "output": 0.6,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.15,
+              "output": 0.6,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-flash-preview-05-20": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 24576,
+              "minValue": 0,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-flash-preview-05-20",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "thinking_token": {
+              "price": 0.035
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 0.15,
+              "output": 0.6,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 0.15,
+              "output": 0.6,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-pro": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 32768,
+              "minValue": 128,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-pro",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "thinking_token": {
+              "price": 0.1
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 1.25,
+              "output": 10,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 2.5,
+              "output": 15,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-pro-exp-03-25": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 128000,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-pro-exp-03-25",
+      "max_output_tokens": 128000,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-pro-preview-03-25": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-pro-preview-03-25",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 1.25,
+              "output": 10,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 2.5,
+              "output": 15,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-2.5-pro-preview-05-06": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 32768,
+              "minValue": 128,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-2.5-pro-preview-05-06",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 1.25,
+              "output": 10,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 2.5,
+              "output": 15,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-3-flash-preview": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 24576,
+              "minValue": 0,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled",
+                "disabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-3-flash-preview",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 140
+            },
+            "web_search": {
+              "price": 140
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "cache_write": 0.5,
+              "cached_input": 0.05,
+              "input": 0.5,
+              "output": 3,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "cache_write": 0.5,
+              "cached_input": 0.05,
+              "input": 0.5,
+              "output": 3,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-3-pro-image-preview": {
+      "_playground_disabled": true,
+      "id": "gemini-3-pro-image-preview",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "image_token": {
+              "price": 0.3
+            },
+            "thinking_token": {
+              "price": 0.12
+            },
+            "web_search": {
+              "price": 140
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "input": 2,
+              "output": 12,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "input": 2,
+              "output": 12,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-3-pro-preview": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 32768,
+              "minValue": 128,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-3-pro-preview",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "cache_write": 0.2,
+              "cached_input": 4.5,
+              "input": 2,
+              "output": 12,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "cache_write": 0.4,
+              "cached_input": 4.5,
+              "input": 4,
+              "output": 18,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-3-pro-preview-02-05": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 65536,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        },
+        {
+          "defaultValue": null,
+          "key": "thinking",
+          "properties": {
+            "budget_tokens": {
+              "maxValue": 32768,
+              "minValue": 128,
+              "type": "number"
+            },
+            "type": {
+              "enum": [
+                "enabled"
+              ],
+              "type": "string"
+            }
+          },
+          "skipValues": [
+            null
+          ]
+        }
+      ],
+      "features": {
+        "document_input": true,
+        "function_calling": true,
+        "pdf_input": true,
+        "vision": true
+      },
+      "id": "gemini-3-pro-preview-02-05",
+      "max_output_tokens": 65536,
+      "modality": {
+        "input": [
+          "text",
+          "image",
+          "pdf",
+          "document"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "additional": {
+          "prices": {
+            "search": {
+              "price": 350
+            },
+            "web_search": {
+              "price": 350
+            }
+          },
+          "unit": "USD_per_unit"
+        },
+        "context_tiers": [
+          {
+            "context_tokens_up_to": 128000,
+            "description": "Context up to 128,000 tokens",
+            "name": "standard",
+            "tokens": {
+              "cache_write": 0.2,
+              "cached_input": 4.5,
+              "input": 2,
+              "output": 12,
+              "unit": "USD_per_million_tokens"
+            }
+          },
+          {
+            "context_tokens_above": 128000,
+            "description": "Context above 128,000 tokens",
+            "name": "extended_context",
+            "tokens": {
+              "cache_write": 0.4,
+              "cached_input": 4.5,
+              "input": 4,
+              "output": 18,
+              "unit": "USD_per_million_tokens"
+            }
+          }
+        ],
+        "currency": "USD",
+        "description": "Pricing varies based on total context length (input + output tokens)",
+        "type": "tiered_by_context"
+      },
+      "type": "chat"
+    },
+    "gemini-embedding-001": {
+      "_playground_disabled": true,
+      "id": "gemini-embedding-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.15,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "embedding"
+    },
+    "gemini-exp-1121": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        }
+      ],
+      "id": "gemini-exp-1121",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-exp-1206": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        }
+      ],
+      "id": "gemini-exp-1206",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gemini-pro": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        },
+        {
+          "defaultValue": null,
+          "key": "response_format",
+          "options": [
+            {
+              "name": "Text",
+              "value": null
+            },
+            {
+              "name": "JSON Object",
+              "schema": {
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "value": "json_object"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_object"
+            },
+            {
+              "name": "JSON Schema",
+              "params": {
+                "defaultValue": null,
+                "key": "json_schema",
+                "skipValues": [
+                  null
+                ],
+                "type": "json"
+              },
+              "schema": {
+                "properties": {
+                  "json_schema": {
+                    "type": "object"
+                  },
+                  "type": {
+                    "type": "string",
+                    "value": "json_schema"
+                  }
+                },
+                "type": "object"
+              },
+              "value": "json_schema"
+            }
+          ],
+          "skipValues": [
+            null
+          ],
+          "type": "string"
+        }
+      ],
+      "features": {
+        "function_calling": true
+      },
+      "id": "gemini-pro",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.25,
+          "output": 0.5,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "gemini-pro-vision": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        }
+      ],
+      "features": {
+        "function_calling": true,
+        "vision": true
+      },
+      "id": "gemini-pro-vision",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.25,
+          "output": 0.5,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "imagen-3.0-generate-002": {
+      "_playground_disabled": true,
+      "id": "imagen-3.0-generate-002",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "text"
+    },
+    "imagen-4.0-fast-generate-001": {
+      "_playground_disabled": true,
+      "id": "imagen-4.0-fast-generate-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "text"
+    },
+    "imagen-4.0-generate-001": {
+      "_playground_disabled": true,
+      "id": "imagen-4.0-generate-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "text"
+    },
+    "imagen-4.0-ultra-generate-001": {
+      "_playground_disabled": true,
+      "id": "imagen-4.0-ultra-generate-001",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "text"
+    },
+    "learnlm-1.5-pro-experimental": {
+      "_parameters": [
+        {
+          "defaultValue": 256,
+          "key": "max_tokens",
+          "maxValue": 4096,
+          "minValue": 1
+        },
+        {
+          "defaultValue": 0.7,
+          "key": "temperature",
+          "maxValue": 2,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 1,
+          "key": "top_p",
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "defaultValue": 40,
+          "key": "top_k",
+          "maxValue": 100,
+          "minValue": 0
+        },
+        {
+          "defaultValue": null,
+          "key": "stop",
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "array-of-strings"
+        },
+        {
+          "defaultValue": true,
+          "key": "stream",
+          "type": "boolean"
+        },
+        {
+          "defaultValue": null,
+          "key": "tool_choice",
+          "options": [
+            {
+              "name": "None",
+              "value": "none"
+            },
+            {
+              "name": "Auto",
+              "value": "auto"
+            },
+            {
+              "name": "Required",
+              "value": "required"
+            },
+            {
+              "name": "Custom",
+              "schema": {
+                "type": "json"
+              },
+              "value": "custom"
+            }
+          ],
+          "rule": {
+            "default": {
+              "condition": "tools",
+              "else": null,
+              "then": "auto"
+            }
+          },
+          "skipValues": [
+            null,
+            []
+          ],
+          "type": "non-view-manage-data"
+        }
+      ],
+      "id": "learnlm-1.5-pro-experimental",
+      "max_output_tokens": 4096,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    }
+  },
+  "name": "google",
+  "schema_version": "2.0"
+}

@@ -1,0 +1,21 @@
+{
+  "_defaults": null,
+  "id": "nomic",
+  "models": {
+    "nomic-embed-text-v1": {
+      "_config_source": "pricing_only",
+      "id": "nomic-embed-text-v1",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.1,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    }
+  },
+  "name": "nomic",
+  "schema_version": "2.0"
+}

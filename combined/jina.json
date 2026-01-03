@@ -1,0 +1,125 @@
+{
+  "_defaults": null,
+  "id": "jina",
+  "models": {
+    "jina-colbert-v1-en": {
+      "_config_source": "pricing_only",
+      "id": "jina-colbert-v1-en",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jina-colbert-v2": {
+      "_config_source": "pricing_only",
+      "id": "jina-colbert-v2",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jina-embeddings-v2-base-code": {
+      "_config_source": "pricing_only",
+      "id": "jina-embeddings-v2-base-code",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jina-embeddings-v2-base-de": {
+      "_config_source": "pricing_only",
+      "id": "jina-embeddings-v2-base-de",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jina-embeddings-v2-base-en": {
+      "_config_source": "pricing_only",
+      "id": "jina-embeddings-v2-base-en",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jina-embeddings-v2-base-es": {
+      "_config_source": "pricing_only",
+      "id": "jina-embeddings-v2-base-es",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jina-embeddings-v2-base-zh": {
+      "_config_source": "pricing_only",
+      "id": "jina-embeddings-v2-base-zh",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jina-reranker-v1-base-en": {
+      "_config_source": "pricing_only",
+      "id": "jina-reranker-v1-base-en",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jina-reranker-v2-base-multilingual": {
+      "_config_source": "pricing_only",
+      "id": "jina-reranker-v2-base-multilingual",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    }
+  },
+  "name": "jina",
+  "schema_version": "2.0"
+}

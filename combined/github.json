@@ -1,0 +1,138 @@
+{
+  "_defaults": null,
+  "id": "github",
+  "models": {
+    "AI21-Jamba-Instruct": {
+      "_parameters": [],
+      "id": "AI21-Jamba-Instruct",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "Mistral-large": {
+      "_parameters": [],
+      "id": "Mistral-large",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "Mistral-nemo": {
+      "_parameters": [],
+      "id": "Mistral-nemo",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "Phi-3-medium-128k-instruct": {
+      "_parameters": [],
+      "id": "Phi-3-medium-128k-instruct",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "cohere-command-r": {
+      "_parameters": [],
+      "id": "cohere-command-r",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "cohere-command-r-plus": {
+      "_parameters": [],
+      "id": "cohere-command-r-plus",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "gpt-4o": {
+      "_parameters": [],
+      "id": "gpt-4o",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "meta-llama-3-70b-instruct": {
+      "_parameters": [],
+      "id": "meta-llama-3-70b-instruct",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "meta-llama-3-8b-instruct": {
+      "_parameters": [],
+      "id": "meta-llama-3-8b-instruct",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "meta-llama-3.1-70b-instruct": {
+      "_parameters": [],
+      "id": "meta-llama-3.1-70b-instruct",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    }
+  },
+  "name": "github",
+  "schema_version": "2.0"
+}

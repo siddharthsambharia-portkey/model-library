@@ -1,0 +1,190 @@
+{
+  "_defaults": {
+    "message_roles": [
+      "system",
+      "user",
+      "assistant"
+    ],
+    "parameters": [
+      {
+        "defaultValue": 256,
+        "key": "max_tokens",
+        "maxValue": 8192,
+        "minValue": 1
+      },
+      {
+        "defaultValue": 0.7,
+        "key": "temperature",
+        "maxValue": 1,
+        "minValue": 0
+      },
+      {
+        "defaultValue": null,
+        "key": "stop",
+        "skipValues": [
+          null,
+          []
+        ],
+        "type": "array-of-strings"
+      },
+      {
+        "defaultValue": 1,
+        "key": "top_p",
+        "maxValue": 1,
+        "minValue": 0
+      },
+      {
+        "defaultValue": 1,
+        "key": "top_k",
+        "maxValue": 1,
+        "minValue": 0
+      },
+      {
+        "defaultValue": 1,
+        "key": "n",
+        "maxValue": 10,
+        "minValue": 1
+      },
+      {
+        "defaultValue": 0,
+        "key": "frequency_penalty",
+        "maxValue": 500,
+        "minValue": 0
+      },
+      {
+        "defaultValue": 0,
+        "key": "presence_penalty",
+        "maxValue": 5,
+        "minValue": 0
+      },
+      {
+        "defaultValue": true,
+        "key": "stream",
+        "type": "boolean"
+      }
+    ],
+    "pricing_formula": {
+      "request": {
+        "operands": [
+          {
+            "value": "input_tokens"
+          },
+          {
+            "value": "rates.request_token"
+          }
+        ],
+        "operation": "multiply"
+      },
+      "response": {
+        "operands": [
+          {
+            "value": "output_tokens"
+          },
+          {
+            "value": "rates.response_token"
+          }
+        ],
+        "operation": "multiply"
+      }
+    }
+  },
+  "id": "ai21",
+  "models": {
+    "j2-light": {
+      "_remove_parameters": [
+        "stream"
+      ],
+      "id": "j2-light",
+      "max_output_tokens": 8192,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "j2-mid": {
+      "_remove_parameters": [
+        "stream"
+      ],
+      "id": "j2-mid",
+      "max_output_tokens": 8192,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "j2-ultra": {
+      "_remove_parameters": [
+        "stream"
+      ],
+      "id": "j2-ultra",
+      "max_output_tokens": 8192,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "jamba-1.5-large": {
+      "_playground_disabled": true,
+      "id": "jamba-1.5-large",
+      "max_output_tokens": 8192,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 2,
+          "output": 8,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "jamba-1.5-mini": {
+      "_playground_disabled": true,
+      "id": "jamba-1.5-mini",
+      "max_output_tokens": 8192,
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.2,
+          "output": 0.4,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    }
+  },
+  "name": "ai21",
+  "schema_version": "2.0"
+}

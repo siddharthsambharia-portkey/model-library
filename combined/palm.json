@@ -1,0 +1,110 @@
+{
+  "_defaults": {
+    "message_roles": [
+      "system",
+      "user",
+      "assistant"
+    ],
+    "parameters": [
+      {
+        "defaultValue": 0.2,
+        "key": "temperature",
+        "maxValue": 1,
+        "minValue": 0
+      },
+      {
+        "defaultValue": 1,
+        "key": "top_p",
+        "maxValue": 1,
+        "minValue": 0
+      },
+      {
+        "defaultValue": 1,
+        "key": "candidateCount",
+        "maxValue": 8,
+        "minValue": 1
+      }
+    ],
+    "pricing_formula": {
+      "request": {
+        "operands": [
+          {
+            "value": "input_tokens"
+          },
+          {
+            "value": "rates.request_token"
+          }
+        ],
+        "operation": "multiply"
+      },
+      "response": {
+        "operands": [
+          {
+            "value": "output_tokens"
+          },
+          {
+            "value": "rates.response_token"
+          }
+        ],
+        "operation": "multiply"
+      }
+    }
+  },
+  "id": "palm",
+  "models": {
+    "chat-bison-001": {
+      "id": "chat-bison-001",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "models/chat-bison-001": {
+      "_config_source": "pricing_only",
+      "id": "models/chat-bison-001",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.5,
+          "output": 0.5,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "models/text-bison-001": {
+      "_config_source": "pricing_only",
+      "id": "models/text-bison-001",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.5,
+          "output": 0.5,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "text-bison-001": {
+      "id": "text-bison-001",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "text"
+    }
+  },
+  "name": "palm",
+  "schema_version": "2.0"
+}

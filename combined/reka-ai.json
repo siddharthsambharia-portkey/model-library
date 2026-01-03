@@ -1,0 +1,106 @@
+{
+  "_defaults": null,
+  "id": "reka-ai",
+  "models": {
+    "reka-core": {
+      "_config_source": "pricing_only",
+      "id": "reka-core",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 10,
+          "output": 25,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "reka-core-20240415": {
+      "_config_source": "pricing_only",
+      "id": "reka-core-20240415",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 10,
+          "output": 25,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "reka-core-20240501": {
+      "_config_source": "pricing_only",
+      "id": "reka-core-20240501",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 10,
+          "output": 25,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "reka-edge": {
+      "_config_source": "pricing_only",
+      "id": "reka-edge",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.4,
+          "output": 1,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "reka-edge-20240208": {
+      "_config_source": "pricing_only",
+      "id": "reka-edge-20240208",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.4,
+          "output": 1,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "reka-flash": {
+      "_config_source": "pricing_only",
+      "id": "reka-flash",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.8,
+          "output": 2,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "reka-flash-20240226": {
+      "_config_source": "pricing_only",
+      "id": "reka-flash-20240226",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.8,
+          "output": 2,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    }
+  },
+  "name": "reka-ai",
+  "schema_version": "2.0"
+}

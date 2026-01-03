@@ -1,0 +1,217 @@
+{
+  "_defaults": null,
+  "id": "stability-ai",
+  "models": {
+    "core": {
+      "_config_source": "pricing_only",
+      "id": "core",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 300
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "sd3-large": {
+      "_config_source": "pricing_only",
+      "id": "sd3-large",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 650
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "sd3-large-turbo": {
+      "_config_source": "pricing_only",
+      "id": "sd3-large-turbo",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 400
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "sd3-medium": {
+      "_config_source": "pricing_only",
+      "id": "sd3-medium",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 350
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "sd3.5-large": {
+      "_config_source": "pricing_only",
+      "id": "sd3.5-large",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 650
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "sd3.5-large-turbo": {
+      "_config_source": "pricing_only",
+      "id": "sd3.5-large-turbo",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 400
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "sd3.5-medium": {
+      "_config_source": "pricing_only",
+      "id": "sd3.5-medium",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 350
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "stable-diffusion-v1-6": {
+      "_config_source": "pricing_only",
+      "id": "stable-diffusion-v1-6",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 400
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "stable-diffusion-xl-1024-v1-0": {
+      "_config_source": "pricing_only",
+      "id": "stable-diffusion-xl-1024-v1-0",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 400
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "stable-diffusion-xl-beta-v2-2-2": {
+      "_config_source": "pricing_only",
+      "id": "stable-diffusion-xl-beta-v2-2-2",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 400
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "ultra": {
+      "_config_source": "pricing_only",
+      "id": "ultra",
+      "pricing": {
+        "currency": "USD",
+        "images": {
+          "prices": {
+            "default": {
+              "default": {
+                "price": 800
+              }
+            }
+          },
+          "unit": "USD_per_image"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    }
+  },
+  "name": "stability-ai",
+  "schema_version": "2.0"
+}

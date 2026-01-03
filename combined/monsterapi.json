@@ -1,0 +1,64 @@
+{
+  "_defaults": null,
+  "id": "monsterapi",
+  "models": {
+    "HuggingFaceH4/zephyr-7b-beta": {
+      "_config_source": "pricing_only",
+      "id": "HuggingFaceH4/zephyr-7b-beta",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.04559,
+          "output": 0.4559,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0": {
+      "_config_source": "pricing_only",
+      "id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.02818,
+          "output": 0.2818,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "microsoft/phi-2": {
+      "_config_source": "pricing_only",
+      "id": "microsoft/phi-2",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.03483,
+          "output": 0.3483,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "mistralai/Mistral-7B-Instruct-v0.2": {
+      "_config_source": "pricing_only",
+      "id": "mistralai/Mistral-7B-Instruct-v0.2",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.04559,
+          "output": 0.4559,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    }
+  },
+  "name": "monsterapi",
+  "schema_version": "2.0"
+}

@@ -1,0 +1,99 @@
+{
+  "_defaults": null,
+  "id": "inference-net",
+  "models": {
+    "meta-llama/llama-3.1-70b-instruct/fp-8": {
+      "_parameters": [],
+      "id": "meta-llama/llama-3.1-70b-instruct/fp-8",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "meta-llama/llama-3.1-8b-instruct/fp-16": {
+      "_parameters": [],
+      "id": "meta-llama/llama-3.1-8b-instruct/fp-16",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "meta-llama/llama-3.1-8b-instruct/fp-8": {
+      "_parameters": [],
+      "id": "meta-llama/llama-3.1-8b-instruct/fp-8",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "meta-llama/llama-3.2-11b-instruct/fp-16": {
+      "_parameters": [],
+      "id": "meta-llama/llama-3.2-11b-instruct/fp-16",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "meta-llama/llama-3.2-1b-instruct/fp-8": {
+      "_parameters": [],
+      "id": "meta-llama/llama-3.2-1b-instruct/fp-8",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "meta-llama/llama-3.2-3b-instruct/fp-8": {
+      "_parameters": [],
+      "id": "meta-llama/llama-3.2-3b-instruct/fp-8",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "mistralai/mistral-nemo-12b-instruct/fp-8": {
+      "_parameters": [],
+      "id": "mistralai/mistral-nemo-12b-instruct/fp-8",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    }
+  },
+  "name": "inference-net",
+  "schema_version": "2.0"
+}

@@ -1,0 +1,47 @@
+{
+  "_defaults": null,
+  "id": "lemonfox-ai",
+  "models": {
+    "llama-70b-chat": {
+      "_parameters": [],
+      "id": "llama-70b-chat",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "llama-8b-chat": {
+      "_parameters": [],
+      "id": "llama-8b-chat",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    },
+    "mixtral-chat": {
+      "_parameters": [],
+      "id": "mixtral-chat",
+      "modality": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "type": "chat"
+    }
+  },
+  "name": "lemonfox-ai",
+  "schema_version": "2.0"
+}

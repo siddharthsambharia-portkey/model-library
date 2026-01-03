@@ -1,0 +1,78 @@
+{
+  "_defaults": null,
+  "id": "predibase",
+  "models": {
+    "21b": {
+      "_config_source": "pricing_only",
+      "id": "21b",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.25,
+          "output": 0.25,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "70b": {
+      "_config_source": "pricing_only",
+      "id": "70b",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 1,
+          "output": 1,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "7b": {
+      "_config_source": "pricing_only",
+      "id": "7b",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 0.2,
+          "output": 0.2,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "mixtral-8x7b-instruct-v0-1": {
+      "_config_source": "pricing_only",
+      "id": "mixtral-8x7b-instruct-v0-1",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 1,
+          "output": 1,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    },
+    "mixtral-8x7b-v0-1": {
+      "_config_source": "pricing_only",
+      "id": "mixtral-8x7b-v0-1",
+      "pricing": {
+        "currency": "USD",
+        "tokens": {
+          "input": 1,
+          "output": 1,
+          "unit": "USD_per_million_tokens"
+        },
+        "type": "pay_as_you_go"
+      },
+      "type": "chat"
+    }
+  },
+  "name": "predibase",
+  "schema_version": "2.0"
+}
