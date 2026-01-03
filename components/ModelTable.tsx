@@ -358,10 +358,10 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
                     </td>
                     <td>
                       <Link 
-                        href={`/models/${model.provider}/${model.id}`}
+                        href={`/models/${encodeURIComponent(model.provider)}/${encodeURIComponent(model.id)}`}
                         className="font-medium text-text-primary hover:text-accent-primary transition-colors"
                       >
-                        {model.id}
+                        {model.name || model.id}
                       </Link>
                     </td>
                     <td className="font-mono text-text-secondary">

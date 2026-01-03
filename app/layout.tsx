@@ -41,8 +41,8 @@ export default function RootLayout({
         <JsonLd type="organization" />
       </head>
       <body className="font-sans antialiased">
-        {/* Background Grid Pattern */}
-        <div className="fixed inset-0 bg-grid-pattern bg-grid opacity-50 pointer-events-none" />
+        {/* Background Grid Pattern - only on homepage, reduced opacity */}
+        <div className="fixed inset-0 bg-grid-pattern opacity-20 pointer-events-none z-[-1]" />
         {children}
       </body>
     </html>

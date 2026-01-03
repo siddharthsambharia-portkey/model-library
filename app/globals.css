@@ -547,6 +547,36 @@ body {
 .animation-delay-400 { animation-delay: 400ms; }
 .animation-delay-500 { animation-delay: 500ms; }
 
+/* Floating animations for hero icon */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-8px) translateX(4px); }
+}
+
+@keyframes floatMedium {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-6px) translateX(-3px); }
+}
+
+@keyframes floatFast {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-4px) translateX(2px); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: floatMedium 3s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-float-fast {
+  animation: floatFast 2.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
 /* ============================================
    LINK STYLES
    ============================================ */

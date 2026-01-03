@@ -10,13 +10,52 @@ let cachedModels: Model[] | null = null
 let cachedProviders: Provider[] | null = null
 
 function formatModelName(id: string): string {
-  // Convert model ID to human readable name
-  return id
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, (char) => char.toUpperCase())
-    .replace(/(\d)/g, ' $1')
-    .replace(/\s+/g, ' ')
-    .trim()
+  let name = id
+  
+  // Handle org/model format - keep only the model part
+  if (name.includes('/')) {
+    const parts = name.split('/')
+    name = parts[parts.length - 1]
+  }
+  
+  // Remove @ symbol variants (e.g., claude-3-5-haiku@20241022)
+  name = name.replace(/@\d+$/, '')
+  
+  // Remove date suffixes: -20241022, -2024-10-22, etc. (before hyphen replacement)
+  name = name.replace(/-20\d{6}(-v[\d.:]+)?$/g, '')  // -20241022 or -20241022-v1:0
+  name = name.replace(/-20\d{2}-\d{2}-\d{2}$/g, '')  // -2024-10-22
+  name = name.replace(/-\d{4}$/g, '')                 // -0725, -2507 (month-day patterns)
+  name = name.replace(/-latest$/i, '')                // -latest
+  
+  // Replace hyphens/underscores with spaces
+  name = name.replace(/[-_]/g, ' ')
+  
+  // Clean up multiple spaces
+  name = name.replace(/\s+/g, ' ').trim()
+  
+  // Title case with smart handling
+  name = name.split(' ').map(word => {
+    const lower = word.toLowerCase()
+    
+    // Uppercase known abbreviations
+    if (['gpt', 'ai', 'xl', 'xxl', 'ocr', 'vl', 'fp8', 'fp16', 'llm', 'bert', 'moe'].includes(lower)) {
+      return word.toUpperCase()
+    }
+    
+    // Version patterns (v1, v2, v0.1, etc.)
+    if (lower.match(/^v\d/i)) return word.toUpperCase()
+    
+    // Size patterns - handle B (billion) suffix
+    if (word.match(/^\d+b$/i)) return word.slice(0, -1) + 'B'
+    
+    // Keep numbers as-is
+    if (word.match(/^\d+$/)) return word
+    
+    // Normal title case
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  }).join(' ')
+  
+  return name
 }
 
 function formatProviderName(id: string): string {
@@ -192,5 +231,8 @@ export async function getModelsByProvider(providerId: string): Promise<Model[]> 
 
 export async function getModel(providerId: string, modelId: string): Promise<Model | null> {
   const models = await getAllModels()
-  return models.find(m => m.provider === providerId && m.id === modelId) || null
+  // Decode URL-encoded model ID (e.g., "anthropic%2Fclaude-4-opus" -> "anthropic/claude-4-opus")
+  const decodedModelId = decodeURIComponent(modelId)
+  const decodedProviderId = decodeURIComponent(providerId)
+  return models.find(m => m.provider === decodedProviderId && m.id === decodedModelId) || null
 }

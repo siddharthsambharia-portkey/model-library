@@ -43,7 +43,7 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
   const providerStyle = getProviderColor(provider)
 
   return (
-    <main className="min-h-screen bg-bg-base">
+    <main className="min-h-screen bg-bg-base" style={{ backgroundImage: 'none' }}>
       <Header />
       
       <div className="pt-20 px-4 md:px-6 max-w-[1400px] mx-auto pb-16">
