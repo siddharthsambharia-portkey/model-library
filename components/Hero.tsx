@@ -195,7 +195,7 @@ export default function Hero({ modelCount = 2334, providerCount = 39, featuredMo
           </p>
           
           {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
             <button 
               onClick={scrollToModels}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-text-primary text-bg-base font-medium hover:opacity-90 transition-all"
@@ -212,22 +212,6 @@ export default function Hero({ modelCount = 2334, providerCount = 39, featuredMo
           </div>
         </div>
 
-        {/* Search Bar - Prominent */}
-        <div className="max-w-2xl mx-auto mb-16">
-          <div 
-            onClick={scrollToModels}
-            className="flex items-center gap-3 px-5 py-4 rounded-xl bg-bg-primary border border-border-primary hover:border-border-hover cursor-pointer transition-all group"
-          >
-            <svg className="w-5 h-5 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <span className="text-text-muted flex-1">Search for a model, provider, or capability...</span>
-            <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded bg-bg-elevated text-text-faint text-xs font-mono">
-              ⌘K
-            </kbd>
-          </div>
-        </div>
-
         {/* Featured Providers - Pills */}
         {topProviders.length > 0 && (
           <div className="mb-16">
@@ -238,30 +222,6 @@ export default function Hero({ modelCount = 2334, providerCount = 39, featuredMo
             <div className="flex flex-wrap items-center justify-center gap-2">
               {topProviders.map(provider => (
                 <ProviderPill key={provider.id} provider={provider} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Featured Models Grid */}
-        {displayModels.length > 0 && (
-          <div className="mb-12">
-            <div className="flex items-center justify-between mb-5">
-              <div className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-accent-secondary" />
-                <span className="text-sm text-text-muted uppercase tracking-wider">Featured Models</span>
-              </div>
-              <button
-                onClick={scrollToModels}
-                className="text-sm text-text-muted hover:text-text-primary flex items-center gap-1 transition-colors"
-              >
-                View all
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-              {displayModels.map((model) => (
-                <FeaturedModelCard key={`${model.provider}-${model.id}`} model={model} />
               ))}
             </div>
           </div>

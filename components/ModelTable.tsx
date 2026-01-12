@@ -13,7 +13,8 @@ import {
   Check,
   ArrowUpDown,
   X,
-  SlidersHorizontal
+  SlidersHorizontal,
+  ExternalLink
 } from 'lucide-react'
 import Fuse from 'fuse.js'
 import { Model, Provider, formatPrice, formatContextWindow } from '@/lib/types'
@@ -302,17 +303,8 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
                   onClick={() => handleSort('name')}
                 >
                   <div className="flex items-center gap-1.5">
-                    Model
+                    Model ID
                     <SortIcon field="name" />
-                  </div>
-                </th>
-                <th 
-                  className="cursor-pointer hover:bg-bg-hover transition-colors"
-                  onClick={() => handleSort('context')}
-                >
-                  <div className="flex items-center gap-1.5">
-                    Output
-                    <SortIcon field="context" />
                   </div>
                 </th>
                 <th 
@@ -345,27 +337,26 @@ export default function ModelTable({ models, providers }: ModelTableProps) {
                     <td>
                       <Link 
                         href={`/models/${model.provider}`}
-                        className="inline-flex items-center gap-2 hover:text-text-primary transition-colors"
+                        className="inline-flex items-center gap-2 hover:text-accent-primary transition-colors group/provider"
                       >
                         <span 
                           className="w-2 h-2 rounded-full flex-shrink-0"
                           style={{ backgroundColor: providerStyle.color }}
                         />
-                        <span className="text-text-secondary group-hover:text-text-primary transition-colors">
+                        <span className="text-text-secondary group-hover/provider:text-accent-primary transition-colors">
                           {model.providerDisplayName}
                         </span>
+                        <ExternalLink className="w-3 h-3 text-text-faint group-hover/provider:text-accent-primary transition-colors" />
                       </Link>
                     </td>
                     <td>
                       <Link 
                         href={`/models/${encodeURIComponent(model.provider)}/${encodeURIComponent(model.id)}`}
-                        className="font-medium text-text-primary hover:text-accent-primary transition-colors"
+                        className="inline-flex items-center gap-2 font-medium text-text-primary hover:text-accent-primary transition-colors group/model"
                       >
-                        {model.name || model.id}
+                        {model.id}
+                        <ExternalLink className="w-3 h-3 text-text-faint group-hover/model:text-accent-primary transition-colors" />
                       </Link>
-                    </td>
-                    <td className="font-mono text-text-secondary">
-                      {formatContextWindow(model.maxOutputTokens)}
                     </td>
                     <td className="font-mono">
                       <span className="text-text-primary">{formatPrice(model.pricing?.input)}</span>
