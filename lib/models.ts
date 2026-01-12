@@ -1,9 +1,98 @@
-import fs from 'fs'
-import path from 'path'
 import { Model, Provider, ModelPricing, ModelFeatures } from './types'
+
+// Static imports for all provider JSON files
+// This makes the data available in Cloudflare Workers
+import ai21Data from '@/combined/ai21.json'
+import anthropicData from '@/combined/anthropic.json'
+import anyscaleData from '@/combined/anyscale.json'
+import azureAiData from '@/combined/azure-ai.json'
+import azureOpenaiData from '@/combined/azure-openai.json'
+import bedrockData from '@/combined/bedrock.json'
+import cerebrasData from '@/combined/cerebras.json'
+import cohereData from '@/combined/cohere.json'
+import dashscopeData from '@/combined/dashscope.json'
+import deepbricksData from '@/combined/deepbricks.json'
+import deepinfraData from '@/combined/deepinfra.json'
+import deepseekData from '@/combined/deepseek.json'
+import fireworksAiData from '@/combined/fireworks-ai.json'
+import fireworksData from '@/combined/fireworks.json'
+import githubData from '@/combined/github.json'
+import googleData from '@/combined/google.json'
+import groqData from '@/combined/groq.json'
+import inferenceNetData from '@/combined/inference-net.json'
+import jinaData from '@/combined/jina.json'
+import lambdaData from '@/combined/lambda.json'
+import lemonfoxAiData from '@/combined/lemonfox-ai.json'
+import mistralAiData from '@/combined/mistral-ai.json'
+import monsterapiData from '@/combined/monsterapi.json'
+import nebiusData from '@/combined/nebius.json'
+import nomicData from '@/combined/nomic.json'
+import novitaAiData from '@/combined/novita-ai.json'
+import openAiData from '@/combined/open-ai.json'
+import openaiData from '@/combined/openai.json'
+import openrouterData from '@/combined/openrouter.json'
+import oracleData from '@/combined/oracle.json'
+import palmData from '@/combined/palm.json'
+import perplexityAiData from '@/combined/perplexity-ai.json'
+import predibaseData from '@/combined/predibase.json'
+import rekaAiData from '@/combined/reka-ai.json'
+import sagemakerData from '@/combined/sagemaker.json'
+import segmindData from '@/combined/segmind.json'
+import stabilityAiData from '@/combined/stability-ai.json'
+import togetherAiData from '@/combined/together-ai.json'
+import vertexAiData from '@/combined/vertex-ai.json'
+import workersAiData from '@/combined/workers-ai.json'
+import xAiData from '@/combined/x-ai.json'
+import zhipuData from '@/combined/zhipu.json'
 
 // Re-export types and utilities
 export * from './types'
+
+// Map of provider IDs to their data
+const providerDataMap: Record<string, unknown> = {
+  'ai21': ai21Data,
+  'anthropic': anthropicData,
+  'anyscale': anyscaleData,
+  'azure-ai': azureAiData,
+  'azure-openai': azureOpenaiData,
+  'bedrock': bedrockData,
+  'cerebras': cerebrasData,
+  'cohere': cohereData,
+  'dashscope': dashscopeData,
+  'deepbricks': deepbricksData,
+  'deepinfra': deepinfraData,
+  'deepseek': deepseekData,
+  'fireworks-ai': fireworksAiData,
+  'fireworks': fireworksData,
+  'github': githubData,
+  'google': googleData,
+  'groq': groqData,
+  'inference-net': inferenceNetData,
+  'jina': jinaData,
+  'lambda': lambdaData,
+  'lemonfox-ai': lemonfoxAiData,
+  'mistral-ai': mistralAiData,
+  'monsterapi': monsterapiData,
+  'nebius': nebiusData,
+  'nomic': nomicData,
+  'novita-ai': novitaAiData,
+  'open-ai': openAiData,
+  'openai': openaiData,
+  'openrouter': openrouterData,
+  'oracle': oracleData,
+  'palm': palmData,
+  'perplexity-ai': perplexityAiData,
+  'predibase': predibaseData,
+  'reka-ai': rekaAiData,
+  'sagemaker': sagemakerData,
+  'segmind': segmindData,
+  'stability-ai': stabilityAiData,
+  'together-ai': togetherAiData,
+  'vertex-ai': vertexAiData,
+  'workers-ai': workersAiData,
+  'x-ai': xAiData,
+  'zhipu': zhipuData,
+}
 
 // Cache for models data
 let cachedModels: Model[] | null = null
@@ -111,22 +200,15 @@ function formatProviderName(id: string): string {
 export async function getAllModels(): Promise<Model[]> {
   if (cachedModels) return cachedModels
 
-  const combinedDir = path.join(process.cwd(), 'combined')
-  const files = fs.readdirSync(combinedDir).filter(f => f.endsWith('.json'))
-  
   const models: Model[] = []
 
-  for (const file of files) {
-    const providerId = file.replace('.json', '')
-    const filePath = path.join(combinedDir, file)
-    const content = fs.readFileSync(filePath, 'utf-8')
-    
+  for (const [providerId, rawData] of Object.entries(providerDataMap)) {
     try {
-      const data = JSON.parse(content)
-      const providerName = formatProviderName(data.id || providerId)
+      const data = rawData as Record<string, unknown>
+      const providerName = formatProviderName(data.id as string || providerId)
       
       if (data.models) {
-        for (const [modelId, modelData] of Object.entries(data.models)) {
+        for (const [modelId, modelData] of Object.entries(data.models as Record<string, unknown>)) {
           const model = modelData as Record<string, unknown>
           
           // Extract pricing
@@ -178,7 +260,7 @@ export async function getAllModels(): Promise<Model[]> {
         }
       }
     } catch (error) {
-      console.error(`Error parsing ${file}:`, error)
+      console.error(`Error parsing ${providerId}:`, error)
     }
   }
 
